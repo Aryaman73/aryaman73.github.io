@@ -212,10 +212,10 @@ input, select, textarea {
 /* BG */
 
 	#bg {
-		-moz-animation: bg 60s linear infinite;
-		-webkit-animation: bg 60s linear infinite;
-		-ms-animation: bg 60s linear infinite;
-		animation: bg 60s linear infinite;
+		-moz-animation: bg 90s linear infinite;
+		-webkit-animation: bg 90s linear infinite;
+		-ms-animation: bg 90s linear infinite;
+		animation: bg 90s linear infinite;
 		-moz-backface-visibility: hidden;
 		-webkit-backface-visibility: hidden;
 		-ms-backface-visibility: hidden;
@@ -304,7 +304,7 @@ input, select, textarea {
 		width: 6750px;
 	}
 
-/* Overlay */
+/*   */
 
 	@-moz-keyframes overlay {
 		0% {
@@ -312,7 +312,7 @@ input, select, textarea {
 		}
 
 		100% {
-			opacity: 1;
+			opacity: 0.4;
 		}
 	}
 
@@ -322,7 +322,7 @@ input, select, textarea {
 		}
 
 		100% {
-			opacity: 1;
+			opacity: 0.4;
 		}
 	}
 
@@ -332,7 +332,7 @@ input, select, textarea {
 		}
 
 		100% {
-			opacity: 1;
+			opacity: 0.4;
 		}
 	}
 
@@ -342,15 +342,15 @@ input, select, textarea {
 		}
 
 		100% {
-			opacity: 1;
+			opacity: 0.4;
 		}
 	}
 
 	#overlay {
-		-moz-animation: overlay 1.5s 1.5s forwards;
-		-webkit-animation: overlay 1.5s 1.5s forwards;
-		-ms-animation: overlay 1.5s 1.5s forwards;
-		animation: overlay 1.5s 1.5s forwards;
+		-moz-animation: overlay 1s 1s forwards;
+		-webkit-animation: overlay 1s 1s forwards;
+		-ms-animation: overlay 1s 1s forwards;
+		animation: overlay 1s 1s forwards;
 		background-attachment: fixed, fixed;
 		background-image: url("images/overlay-pattern.png"), url("images/overlay.svg");
 		background-position: top left, center center;
