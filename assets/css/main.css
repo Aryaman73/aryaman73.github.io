@@ -212,10 +212,10 @@ input, select, textarea {
 /* BG */
 
 	#bg {
-		-moz-animation: bg 90s linear infinite;
-		-webkit-animation: bg 90s linear infinite;
-		-ms-animation: bg 90s linear infinite;
-		animation: bg 90s linear infinite;
+		-moz-animation: bg 120s linear infinite;
+		-webkit-animation: bg 120s linear infinite;
+		-ms-animation: bg 120s linear infinite;
+		animation: bg 120s linear infinite;
 		-moz-backface-visibility: hidden;
 		-webkit-backface-visibility: hidden;
 		-ms-backface-visibility: hidden;
@@ -554,7 +554,7 @@ input, select, textarea {
 	}
 
 		#header h1 {
-			font-size: 4.35em;
+			font-size: 5.35em;
 			font-weight: 900;
 			letter-spacing: -0.035em;
 			line-height: 1em;
