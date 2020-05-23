@@ -1,6 +1,4 @@
-# aryaman73.github.io & aryamans.me
+# Personal Website
 
-WIP
-
-Website design thanks to HTML5UP (Aerial)
-
+URL: aryaman73.github.io & aryamans.me
+Hosted using namecheap.me
