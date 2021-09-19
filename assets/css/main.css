@@ -197,10 +197,10 @@ input, select, textarea {
 	}
 
 	#wrapper {
-		-moz-animation: wrapper 3s forwards;
-		-webkit-animation: wrapper 3s forwards;
-		-ms-animation: wrapper 3s forwards;
-		animation: wrapper 3s forwards;
+		-moz-animation: wrapper 1.5s forwards;
+		-webkit-animation: wrapper 1.5s forwards;
+		-ms-animation: wrapper 1.5s forwards;
+		animation: wrapper 1.5s forwards;
 		height: 100%;
 		left: 0;
 		opacity: 0;
@@ -212,10 +212,10 @@ input, select, textarea {
 /* BG */
 
 	#bg {
-		-moz-animation: bg 120s linear infinite;
-		-webkit-animation: bg 120s linear infinite;
-		-ms-animation: bg 120s linear infinite;
-		animation: bg 120s linear infinite;
+		-moz-animation: bg 200s linear infinite;
+		-webkit-animation: bg 200s linear infinite;
+		-ms-animation: bg 200s linear infinite;
+		animation: bg 200s linear infinite;
 		-moz-backface-visibility: hidden;
 		-webkit-backface-visibility: hidden;
 		-ms-backface-visibility: hidden;
