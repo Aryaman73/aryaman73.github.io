@@ -1,0 +1,33 @@
+baseURL: "https://aryaman73.github.io" #TODO: should this be aryamans.me?
+languageCode: en-us
+title: aryamans.me
+theme: PaperMod
+
+params:
+  homeInfoParams:
+    Title: "Hey! \U0001F44B"
+    Content: >
+      - I'm Aryaman, a 2B Computer Engineering Student at the University of Waterloo. 
+     
+      - 
+
+      - I'm currently working as a Software Developer at Relay Platform, working with React & Ruby On Rails to create fintech & insurtech products. You might also find me ~~working~~ procrastinating on my website and a million other side projects.
+
+
+  socialIcons:
+    - name: GitHub
+      url: "https://github.com/aryaman73"
+    - name: LinkedIn
+      url: "https://www.linkedin.com/in/aryamans/"
+    - name: Email
+      url: "mailto:a553sing@uwaterloo.ca"
+    # TODO: figure out Devpost Icon
+    - name: Devpost
+      url: "https://devpost.com/Aryaman73"
+
+menu:
+  main:
+    - identifier: tags
+      name: tags
+      url: /tags/
+      weight: "20"
