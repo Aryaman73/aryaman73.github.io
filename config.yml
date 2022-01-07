@@ -1,4 +1,4 @@
-baseURL: "https://aryaman73.github.io" #TODO: should this be aryamans.me?
+baseURL: https://aryaman73.github.io #TODO: should this be aryamans.me?
 languageCode: en-us
 title: aryamans.me
 theme: PaperMod
@@ -7,7 +7,7 @@ params:
   homeInfoParams:
     Title: "Hey! \U0001F44B"
     Content: >
-      - I'm Aryaman, a 2B Computer Engineering Student at the University of Waterloo. 
+      - I'm Aryaman Singh, a 2B Computer Engineering Student at the University of Waterloo. 
      
       - 
 
