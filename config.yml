@@ -7,12 +7,15 @@ params:
   homeInfoParams:
     Title: "Hey! \U0001F44B"
     Content: >
-      - I'm Aryaman Singh, a 2B Computer Engineering Student at the University of Waterloo. 
+      - I'm Aryaman, a 2B Computer Engineering Student at the University of Waterloo. 
      
       - 
 
       - I'm currently working as a Software Developer at Relay Platform, working with React & Ruby On Rails to create fintech & insurtech products. You might also find me ~~working~~ procrastinating on my website and a million other side projects.
 
+      - 
+
+      - In the past, I've worked at Versett, Telus Health and PointClickCare, building and maintaining large scale applications with React, Java, Python and much more. I've also volunteered at Midnight Sun (as a Strategy Developer), Waterloo ECE Society, and HackTheNorth. Feel free to reach out to me if you want to talk, work together or just rant about CSS.
 
   socialIcons:
     - name: GitHub
