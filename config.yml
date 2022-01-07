@@ -1,6 +1,6 @@
-baseURL: "http://example.org/"
+baseURL: "https://aryaman73.github.io" #TODO: should this be aryamans.me?
 languageCode: en-us
-title: Aryaman Singh
+title: aryamans.me
 theme: PaperMod
 
 params:
