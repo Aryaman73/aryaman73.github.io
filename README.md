@@ -10,19 +10,21 @@ Domain thanks to: namecheap.me
 
 # Notes: 
 
-What I've done:
+Creating a new post: `hugo new posts/name-of-post.md`
+Notion's exporting to markdown works surprisingly well, with headings and code blocks working as-is. Links might require more work.
 
-hugo new site
-copied over theme
-created new posts
+External Website: Add `https` in URL for external websites. Format is `[link text](https://link.com)`
 
-add https: in URL for external websites
+Image: Format is `![Image Alt Text](/sub-folder-in-static/name-of-file.png)`
+
+Links:
 
 https://gohugo.io/getting-started/quick-start/
+
 https://github.com/adityatelange/hugo-PaperMod/wiki/Features#regular-mode-default-mode
 
 Got tags from here: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs
 
 Sample YML file: https://github.com/adityatelange/hugo-PaperMod/blob/exampleSite/config.yml#L106s
 
-TODO: Hosting on GitHub Pages: https://gohugo.io/hosting-and-deployment/hosting-on-github/ 
+Hosting on GitHub Pages: https://gohugo.io/hosting-and-deployment/hosting-on-github/ 
