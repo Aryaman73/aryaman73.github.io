@@ -1,0 +1,123 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>React Zendesk, and components that lie | aryamans.me</title>
+<meta name=keywords content="2022,technical">
+<meta name=description content="Zendesk is a very popular cloud-based customer service platform that lets you implement chatbots and CRM systems easily - but you probably recognize them from these buttons at the bottom-right of many websites:
+If you’ve ever wanted to implement this on a React app, you’ve probably encountered React Zendesk, which attempts to convert Zendesk&rsquo;s widget into a React Component. It has over 10k weekly downloads and a bunch of references online, but it is far from official.">
+<meta name=author content>
+<link rel=canonical href=https://aryaman73.github.io/posts/react-zendesk/>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css integrity="sha256-yIlj/i15RiAA/Q+xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as=style>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://aryaman73.github.io/favicon.ico>
+<link rel=icon type=image/png sizes=16x16 href=https://aryaman73.github.io/favicon-16x16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://aryaman73.github.io/favicon-32x32.png>
+<link rel=apple-touch-icon href=https://aryaman73.github.io/apple-touch-icon.png>
+<link rel=mask-icon href=https://aryaman73.github.io/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.91.2">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript><meta property="og:title" content="React Zendesk, and components that lie">
+<meta property="og:description" content="Zendesk is a very popular cloud-based customer service platform that lets you implement chatbots and CRM systems easily - but you probably recognize them from these buttons at the bottom-right of many websites:
+If you’ve ever wanted to implement this on a React app, you’ve probably encountered React Zendesk, which attempts to convert Zendesk&rsquo;s widget into a React Component. It has over 10k weekly downloads and a bunch of references online, but it is far from official.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://aryaman73.github.io/posts/react-zendesk/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-01-07T22:34:48-05:00">
+<meta property="article:modified_time" content="2022-01-07T22:34:48-05:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="React Zendesk, and components that lie">
+<meta name=twitter:description content="Zendesk is a very popular cloud-based customer service platform that lets you implement chatbots and CRM systems easily - but you probably recognize them from these buttons at the bottom-right of many websites:
+If you’ve ever wanted to implement this on a React app, you’ve probably encountered React Zendesk, which attempts to convert Zendesk&rsquo;s widget into a React Component. It has over 10k weekly downloads and a bunch of references online, but it is far from official.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://aryaman73.github.io/posts/"},{"@type":"ListItem","position":3,"name":"React Zendesk, and components that lie","item":"https://aryaman73.github.io/posts/react-zendesk/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"React Zendesk, and components that lie","name":"React Zendesk, and components that lie","description":"Zendesk is a very popular cloud-based customer service platform that lets you implement chatbots and CRM systems easily - but you probably recognize them from these buttons at the bottom-right of many websites:\nIf you’ve ever wanted to implement this on a React app, you’ve probably encountered React Zendesk, which attempts to convert Zendesk\u0026rsquo;s widget into a React Component. It has over 10k weekly downloads and a bunch of references online, but it is far from official.","keywords":["2022","technical"],"articleBody":"Zendesk is a very popular cloud-based customer service platform that lets you implement chatbots and CRM systems easily - but you probably recognize them from these buttons at the bottom-right of many websites:\nIf you’ve ever wanted to implement this on a React app, you’ve probably encountered React Zendesk, which attempts to convert Zendesk’s widget into a React Component. It has over 10k weekly downloads and a bunch of references online, but it is far from official.\nThe Widget API The component attempts to implement the Zendesk Widget, which essentially boils down to a script that appends the button to the document body (using document.body.appendChild). It also has functions using which you can show or hide the button. The script is fairly static - you can’t change the position of the button or place it exactly where you want. It’s always on the bottom right, and always on the top of everything else on this page.\nThis was probably designed as a feature since we generally always want the user to be able to look for help, and the user probably expects this button to be at the bottom-right. For the average React developer, though, this is very strange behaviour for a component.\nThe React Component, but not really You can see the actual usage here, but as you would expect, the library creates a  component for you to use. Behind the scenes, though, this component implements exactly what the widget API does - it simply appends the button to the document body. The component itself doesn’t control whether the button is shown - that is handled by API calls. This behavior is, therefore, closer to a function call than a traditional DOM element. You can “call” this component multiple times, in different parts of your render function, but it won’t do anything - you’re just calling the button initialization repeatedly.\nIf you want the button to always be present on your website, it works well enough. However, if you place it inside a component that re-renders repeatedly, or expect it to hide/show depending on where you place it, it won’t work like you think it should - because again, you’re essentially calling a function that does the same thing every time.\nWhat you really want to do is treat the component like the widget - call it at the top of your project (i.e. App.tsx) and use the API function calls when you want to hide or show the component.\nIn your top-most file, do:\nZendesk zendeskKey={YOUR_KEY_HERE} onLoaded={() = { ZendeskAPI(\"webWidget\", \"hide\"); }} / On pages where you want to show the widget, do:\nuseEffect(() = { ZendeskAPI(\"webWidget\", \"show\"); return () = { ZendeskAPI(\"webWidget\", \"hide\"); }; }, []); (See source here)\nAnd voila! This should work well enough for most cases.\nHowever, to complicate things, the API hide/show function also has a race condition, since it isn’t really intended to be toggled frequently. My recommendation for that would be to avoid complicated logic that dictates whether the widget needs to be visible. Keep it simple, ideally only hiding the widget on specific pages.\nConclusion This is a somewhat dramatic post for what is a very niche topic that very few people would have to deal with. The main reason I’m writing this because it is an interesting case study on how abstraction can lead to misguided expectations and unintended behaviour. In hindsight, if you read the documentation of React-Zendesk, it does seem to hint towards the solution described above. The average developer, though, would install this package and attempt to use it like any other component, by calling it on every page they want the button to show up. This might work initially, but things will start to break if you start to use the Zendesk component like a regular component.\nReference: https://github.com/B3nnyL/react-zendesk/issues/28\n","wordCount":"636","inLanguage":"en","datePublished":"2022-01-07T22:34:48-05:00","dateModified":"2022-01-07T22:34:48-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://aryaman73.github.io/posts/react-zendesk/"},"publisher":{"@type":"Organization","name":"aryamans.me","logo":{"@type":"ImageObject","url":"https://aryaman73.github.io/favicon.ico"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://aryaman73.github.io accesskey=h title="aryamans.me (Alt + H)">aryamans.me</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=https://aryaman73.github.io/tags/ title=tags>
+<span>tags</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<h1 class=post-title>
+React Zendesk, and components that lie
+</h1>
+<div class=post-meta><span title="2022-01-07 22:34:48 -0500 -0500">January 7, 2022</span>
+</div>
+</header>
+<div class=post-content><p>Zendesk is a very popular cloud-based customer service platform that lets you implement chatbots and CRM systems easily - but you probably recognize them from these buttons at the bottom-right of many websites:</p>
+<p><img loading=lazy src=/react-zendesk/button.png#center alt="Zendesk Button">
+</p>
+<p>If you’ve ever wanted to implement this on a React app, you’ve probably encountered <a href=https://www.npmjs.com/package/react-zendesk>React Zendesk</a>, which attempts to convert Zendesk&rsquo;s widget into a React Component. It has over 10k weekly downloads and a bunch of references online, but it is far from official.</p>
+<h3 id=the-widget-api>The Widget API<a hidden class=anchor aria-hidden=true href=#the-widget-api>#</a></h3>
+<p>The component attempts to implement the <a href=https://support.zendesk.com/hc/en-us/articles/4408836216218-Using-Web-Widget-Classic-to-embed-customer-service-in-your-website>Zendesk Widget</a>, which essentially boils down to a script that appends the button to the document body (using <code>document.body.appendChild</code>). It also has functions using which you can show or hide the button. The script is fairly static - you can’t change the position of the button or place it exactly where you want. It’s always on the bottom right, and always on the top of everything else on this page.</p>
+<p>This was probably designed as a feature since we generally always want the user to be able to look for help, and the user <em>probably</em> expects this button to be at the bottom-right. For the average React developer, though, this is very strange behaviour for a component.</p>
+<h3 id=the-react-component-but-not-really>The React Component, but not really<a hidden class=anchor aria-hidden=true href=#the-react-component-but-not-really>#</a></h3>
+<p>You can see the actual usage <a href=%5Bhttps://github.com/B3nnyL/react-zendesk%5D(https://github.com/B3nnyL/react-zendesk)>here</a>, but as you would expect, the library creates a <code>&lt;Zendesk /></code> component for you to use. Behind the scenes, though, this component implements exactly what the widget API does - it simply appends the button to the document body. The component itself doesn&rsquo;t control whether the button is shown - that is handled by API calls. This behavior is, therefore, closer to a function call than a traditional DOM element. You can “call” this component multiple times, in different parts of your render function, but it won’t do anything - you’re just calling the button initialization repeatedly.</p>
+<p>If you want the button to always be present on your website, it works well enough. However, if you place it inside a component that re-renders repeatedly, or expect it to hide/show depending on where you place it, it won’t work like you think it should - because again, you’re essentially calling a function that does the same thing every time.</p>
+<p>What you really want to do is treat the component <em>like</em> the widget - call it at the top of your project (i.e. <code>App.tsx</code>) and use the API function calls when you want to hide or show the component.</p>
+<p>In your top-most file, do:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-jsx data-lang=jsx>&lt;<span style=color:#f92672>Zendesk</span>
+        <span style=color:#a6e22e>zendeskKey</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>YOUR_KEY_HERE</span>}
+        <span style=color:#a6e22e>onLoaded</span><span style=color:#f92672>=</span>{() =&gt; {
+          <span style=color:#a6e22e>ZendeskAPI</span>(<span style=color:#e6db74>&#34;webWidget&#34;</span>, <span style=color:#e6db74>&#34;hide&#34;</span>);
+        }}
+/&gt;
+</code></pre></div><p>On pages where you want to show the widget, do:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-jsx data-lang=jsx><span style=color:#a6e22e>useEffect</span>(() =&gt; {
+    <span style=color:#a6e22e>ZendeskAPI</span>(<span style=color:#e6db74>&#34;webWidget&#34;</span>, <span style=color:#e6db74>&#34;show&#34;</span>);
+
+    <span style=color:#66d9ef>return</span> () =&gt; {
+      <span style=color:#a6e22e>ZendeskAPI</span>(<span style=color:#e6db74>&#34;webWidget&#34;</span>, <span style=color:#e6db74>&#34;hide&#34;</span>);
+    };
+  }, []);
+</code></pre></div><p>(See source <a href=https://github.com/B3nnyL/react-zendesk/issues/28>here</a>)</p>
+<p>And voila! This should work well enough for most cases.</p>
+<p>However, to complicate things, the API hide/show function also has a <a href=https://www.bennadel.com/blog/3248-the-zendesk-web-widget-appears-to-have-a-small-hide-show-race-condition.htm>race condition</a>, since it isn’t really intended to be toggled frequently. My recommendation for that would be to avoid complicated logic that dictates whether the widget needs to be visible. Keep it simple, ideally only hiding the widget on specific pages.</p>
+<h3 id=conclusion>Conclusion<a hidden class=anchor aria-hidden=true href=#conclusion>#</a></h3>
+<p>This is a somewhat dramatic post for what is a very niche topic that very few people would have to deal with. The main reason I’m writing this because it is an interesting case study on how abstraction can lead to misguided expectations and unintended behaviour. In hindsight, if you read the documentation of React-Zendesk, it does seem to hint towards the solution described above. The average developer, though, would install this package and attempt to use it like any other component, by calling it on every page they want the button to show up. This might work initially, but things will start to break if you start to use the Zendesk component like a regular component.</p>
+<p>Reference: <a href=https://github.com/B3nnyL/react-zendesk/issues/28>https://github.com/B3nnyL/react-zendesk/issues/28</a></p>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+<li><a href=https://aryaman73.github.io/tags/2022/>2022</a></li>
+<li><a href=https://aryaman73.github.io/tags/technical/>technical</a></li>
+</ul>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2022 <a href=https://aryaman73.github.io>aryamans.me</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+</body>
+</html>
