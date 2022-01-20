@@ -1,8 +1,6 @@
 # Personal Website
 
 This is just the code for my personal website, hosted using GitHub Pages. 
-
-NOTE: I'm currently in the process of changing my deployment process, so my website will be down for the forseaable future :(
     
 URL: aryaman73.github.io & aryamans.me
 
