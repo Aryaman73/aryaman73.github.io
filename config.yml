@@ -7,15 +7,19 @@ params:
   homeInfoParams:
     Title: "Hey! \U0001F44B"
     Content: >
-      - I'm Aryaman, a 2B Computer Engineering Student at the University of Waterloo. 
-     
-      - 
-
-      - I'm currently working as a Software Developer at Relay Platform, using React & Ruby On Rails to create fintech & insurtech products. You might also find me ~~working~~ procrastinating on my website and a million other side projects.
+      - I'm Aryaman, a 3A Computer Engineering Student at the University of Waterloo.
 
       - 
 
-      - In the past, I've worked at Versett, Telus Health and PointClickCare, building and maintaining large scale applications with React, Java, Python and much more. I've also volunteered at Midnight Sun (as a Strategy Developer), Waterloo ECE Society, and HackTheNorth. Feel free to reach out to me if you want to talk, work together or just rant about CSS.
+      - I've worked at companies like Relay Platform, Versett, Telus and PointClickCare, where I built and maintained large scale applications with React, Ruby on Rails, Java and more. I enjoy building accessible, reliable and thoughtfully-designed applications that focus on the end-user above all.
+      
+      - 
+
+      - I'm currently part of the Waterloo Engineering Society, working as a the Website Director and WEC Technical Director. In the past, you might have met me volunteering with Midnight Sun, Waterloo ECE Society, or HackTheNorth. 
+      
+      - 
+
+      - Feel free to reach out to me if you want to talk, work together or just vent about CSS. Oh, and I'm also looking for Winter '23 internship opportunities 👀.
 
   socialIcons:
     - name: GitHub
@@ -33,4 +37,8 @@ menu:
     - identifier: tags
       name: tags
       url: /tags/
+      weight: "20"
+    - identifier: resume
+      name: resume
+      url: /resume.pdf
       weight: "20"
