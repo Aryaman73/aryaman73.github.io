@@ -7,7 +7,7 @@ params:
   homeInfoParams:
     Title: "Hey! \U0001F44B"
     Content: >
-      - I'm Aryaman, a 3A Computer Engineering Student at the University of Waterloo.
+      - I'm Aryaman, a 3B Computer Engineering Student at the University of Waterloo.
 
       - 
 
@@ -19,7 +19,7 @@ params:
       
       - 
 
-      - Feel free to reach out to me if you want to talk, work together or just vent about CSS. Oh, and I'm also looking for Winter '23 internship opportunities 👀.
+      - Feel free to reach out to me if you want to talk, work together or just vent about CSS. Oh, and I'm also looking for 2023 internship opportunities 👀.
 
   socialIcons:
     - name: GitHub
