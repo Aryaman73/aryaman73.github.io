@@ -11,11 +11,11 @@ params:
 
       - 
 
-      - I'm currently working at Tesla as a Software Engineering in the Firmware Platforms team, where I'm working on large-scale infrastructure projects using Python and Ruby on Rails. In the past, I&rsquo;ve worked at Relay Platform, Versett, Telus and PointClickCare, where I built and maintained large scale applications with React, Ruby on Rails, Java and more. I enjoy building accessible, reliable and thoughtfully-designed applications that focus on the end-user above all.
+      - I'm currently working at Tesla as a Software Engineering in the Firmware Platforms team, where I'm working on large-scale infrastructure projects using Typescript, Python and Ruby. In the past, I&rsquo;ve worked at Relay Platform, Versett, Telus and PointClickCare, where I built and maintained large scale applications with React, Ruby on Rails, Java and more. I enjoy building accessible, reliable and thoughtfully-designed applications that focus on the end-user above all.
       
       - 
 
-      - In the past, you might have met me volunteering with Midnight Sun, Waterloo ECE Society, Waterloo Engineering Competition or HackTheNorth. I
+      - In the past, you might have met me volunteering with Midnight Sun, Waterloo ECE Society, Waterloo Engineering Competition or HackTheNorth.
       
       - 
 
@@ -24,7 +24,7 @@ params:
   socialIcons:
     - name: GitHub
       url: "https://github.com/aryaman73"
-    - name: LinkedIn`
+    - name: LinkedIn
       url: "https://www.linkedin.com/in/aryamans/"
     - name: Email
       url: "mailto:a553sing@uwaterloo.ca"
