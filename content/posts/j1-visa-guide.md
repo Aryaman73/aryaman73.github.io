@@ -5,7 +5,7 @@ draft: false
 tags: ["2023"]
 ---
 
-In many ways, getting the visa for my US internship was `harder than getting my internship, because there is no Blind 75 to help you get through bureaucracy. Though there is a lot of information online, it can feel scattered and hard to find. This is particularly true for non-Canadian citizens since we have an additional interview at the US Consulate. That’s where this guide (hopefully) comes in.
+In many ways, getting the visa for my US internship was harder than getting my internship, because there is no Blind 75 to help you get through bureaucracy. Though there is a lot of information online, it can feel scattered and hard to find. This is particularly true for non-Canadian citizens since we have an additional interview at the US Consulate. That’s where this guide (hopefully) comes in.
 
 
 Before I begin, here are some excellent guides made by other UW students you may want to check out as well:
