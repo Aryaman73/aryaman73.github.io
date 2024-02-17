@@ -21,6 +21,7 @@ jobs:
           hugo-version: 'latest'
           extended: true
 
+      # TODO: Removed build step due to issue with resume.pdf
       # - name: Build
       #   run: hugo --minify
 

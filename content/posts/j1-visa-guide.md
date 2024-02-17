@@ -5,7 +5,7 @@ draft: false
 tags: ["2023"]
 ---
 
-In many ways, getting the visa for my US internship was harder than getting the internship itself, because there is no Blind 75 to help you get through bureaucracy. Though there is a lot of information online, it can feel scattered and hard to find. This is particularly true for non-Canadian citizens since we have an additional interview at the US Consulate. That’s where this guide (hopefully) comes in.
+In many ways, getting the visa for my US internship was harder than getting the internship itself - after all, there is no Leetcode to help you get through USCIS bureaucracy. Though there is some information online, it can feel scattered and hard to find. This is particularly true for non-Canadian citizens since we have an additional interview at the US Consulate. That’s where this guide (hopefully) comes in.
 
 
 Before I begin, here are some excellent guides made by other UW students you may want to check out as well:
@@ -18,7 +18,26 @@ Before I begin, here are some excellent guides made by other UW students you may
 
 ---
 
-# Basics
+# Table of Contents
+- [Table of Contents](#table-of-contents)
+- [The Basics](#the-basics)
+- [The Process](#the-process)
+  - [Step 1: Submit Information to your Sponsor](#step-1-submit-information-to-your-sponsor)
+  - [Step 2: Wait for documents](#step-2-wait-for-documents)
+  - [Step 3: Complete \& Submit DS-160](#step-3-complete--submit-ds-160)
+    - [Location of Interview](#location-of-interview)
+    - [Using the website](#using-the-website)
+    - [Digital Photograph](#digital-photograph)
+  - [Step 4: Book your Interview](#step-4-book-your-interview)
+  - [Step 5: Interview \& Passport Submission](#step-5-interview--passport-submission)
+    - [Before the Interview](#before-the-interview)
+    - [During the Interview](#during-the-interview)
+  - [Step 6: Wait for your passport](#step-6-wait-for-your-passport)
+  - [After receiving your passport](#after-receiving-your-passport)
+
+---
+
+# The Basics
 
 The J1 Visa is an "exchange visitor” visa, which is meant to allow students, teachers, or researchers to study or work in the US. The key thing to note is that this is not a traditional "work" visa (like TN or H1B), and is meant to be more for cultural exchange or training (in fact, exchange students studying at a US university also apply for the J1 Visa). This is why you will have a sponsor (like Intrax or Cultural Vistas) do the main leg work for the visa.
 
@@ -31,7 +50,7 @@ The J1 Visa is an "exchange visitor” visa, which is meant to allow students, t
 
 ---
 
-# Process
+# The Process
 
 The process for getting a J1 Visa is as follows:
 
@@ -47,10 +66,14 @@ Steps 2, 5, and 6 take the most time since you're waiting on your sponsor or the
 
 > ❗ I only have experience with Intrax, though the process with Cultural Vistas should be similar.
 
+---
+
 ## Step 1: Submit Information to your Sponsor
 Once you've signed your internship offer, your company will set you up with a sponsor and (hopefully) an immigration consultant. In this step, you will be asked to submit your personal information, documents (e.g. passports, transcripts, etc.), academic details, and internship details. For Intrax, this is done on their online portal and is fairly straightforward.
 
 This step is 100% dependent on you - **do this as soon as you can**. It should not take more than a day or two, and shouldn't require any special documents outside your passport and transcript. Your process will not move forward until you complete this step.
+
+---
 
 ## Step 2: Wait for documents
 Your sponsor will use this information to generate your DS-2019 and DS-7002 forms and will make a payment to SEVIS for your application.
@@ -69,10 +92,12 @@ These forms were normally sent by physical mail with a wet signature, but since 
 
 Please note that you can start doing Step 3 while you wait to get your forms back.
 
+---
+
 ## Step 3: Complete & Submit DS-160
 The DS-160 is a general form that is required for almost every US visa application. It asks for your personal information, family information, travel history, employment history, education, and a whole lot more. The link for this form is [https://ceac.state.gov/genniv/](https://ceac.state.gov/genniv/).
 
-This is a long-form and will take you a few dedicated hours to complete (probably over a few days). You only require your DS-2019 and SEVIS payment receipt on the very last step of this form, so I would recommend starting this form as soon as possible, and submitting it once you have those documents in hand.
+This is a long form and will take you a few dedicated hours to complete (probably over a few days). You only require your DS-2019 and SEVIS payment receipt on the very last step of this form, so I would recommend starting this form as soon as possible, and submitting it once you have those documents in hand.
 
 Note that "submitting" this form does nothing other than store it in some server somewhere and generate a confirmation barcode you use to book the interview. Though you can not edit the information after submitting it, you can always create a new form. Once your interview is booked, however, you can not change the information on the DS-160 (since you link the interview with one specific DS-160 barcode).
 
@@ -114,19 +139,23 @@ My recommendation would be to go to a local photo studio that specializes in vis
 
 > 💡 The photograph they use for your Visa is the one you submit at the consulate interview (i.e. the one you submit digitally is overridden). I had used an incorrect photo for my DS-160 (I was wearing glasses), so I took a new photo from the studio and used that for my interview. 
 
+---
+
 ## Step 4: Book your Interview
 
 > ❗ No interview is needed if you're a Canadian Citizen
 
 You can book your visa appointment immediately after you fill in and "submit" your DS-160. This is handled entirely by the US embassy in the country you are in. The location you choose will be the same as the location of your DS-160. 
 
-The link to book your interview (in Canada) is here: TODO: 
+The link to book your interview (in Canada) is here: [https://ais.usvisa-info.com/en-ca/niv](https://ais.usvisa-info.com/en-ca/niv)
 
 Read about [choice of location and expedited appointments above](#location-of-interview), but as a reminder, I recommend only booking a date that is well in advance of your start date (2-3 weeks before) OR after your start date (so you can get approved for an expedited appointment).
 
 There is a fee associated with this interview (about $200 at the time of writing), and this fee does **not** have to be covered by the employer (this is not the SEVIS fee you saw in [Step 2](#step-2-wait-to-get-your-ds-forms-and-sevis-payment-receipt), which **must** be played be your employer). Of course, some employers may cover it, though most will not (mine did not directly cover it, but had a relocation package that more than compensated for it).
 
-## 5. Interview & Passport Submission
+---
+
+## Step 5: Interview & Passport Submission
 
 The interview is very straightforward, and I have not heard of any rejections for J1 visas outside of missing documentation.
 
@@ -158,7 +187,7 @@ Some other documents that I would have on hand, but was not asked for:
 
 - I would recommend reaching at least 15 minutes before your interview slot since there is usually a (long) line outside the embassy. They will not let you in if you are early, though.
 
-- **Specific to Toronto:** Note that entry to the embassy for interviews is at the *back* of the building. The fancy entrance at the front is only for ~~upper-caste~~ American citizens. TODO: photo
+- **Specific to Toronto:** Note that entry to the embassy for interviews is at the *back* of the building. The fancy entrance at the front is only for American citizens.
 
 ### During the Interview
 
@@ -166,7 +195,7 @@ Some other documents that I would have on hand, but was not asked for:
 
 Once you are let into the embassy, you'll follow the line and go to multiple booths. If my memory is correct, the first is verifying your documents and submitting your photograph, followed by biometrics (fingerprints), followed by the interview. You will be asked very basic questions during the interview:
 
-- Details about your job (job title, responsibilities, location of office, start/end date)
+- Details about your job (job title, responsibilities, location of the office, start/end date)
 - Details about your background (education, past jobs, or internships)
 - Other logistical information (flights, housing) (I was never asked this, but others have been)
 - Plans to leave the US (I was never asked this, but others have been)
@@ -174,7 +203,9 @@ Once you are let into the embassy, you'll follow the line and go to multiple boo
 
 This is also where you can ask the interviewers for a multiple-entry visa if you specifically need one. Once the interview is done, you submit your passport, and the interviewer will say something along the lines of "Your visa has been approved" and tell you how long it will take to get your passport back. It's fine if they don't say "approved" specifically - regardless of what they say, they actually verify your documents after the interview, so you don't *really* know the status of your application until your DS-160 status page updates.
 
-## 6. Wait for your passport
+--- 
+
+## Step 6: Wait for your passport
 While booking the interview, you would have had the choice to do a Canada Post pickup or pay extra to get it delivered to your home. Depending on when your interview was, you can usually change this until the end of the day of your interview.
 
 **Canada Post:** Only certain Canada Post locations are eligible for pickup (with most of them in Toronto or other big cities). Please note that you will need to show ID when you go for pickup, so if you don't have a Canadian Drivers License or other Canadian ID, you will need to enter somebody else's details and have them pick it up (or pay up for the home delivery.)

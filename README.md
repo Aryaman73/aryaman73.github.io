@@ -6,6 +6,9 @@ URL: aryaman73.github.io & aryamans.me
 
 Domain thanks to: namecheap.me
 
+### WARNING: Build step disabled
+I have disabled the Build step in the GitHub workflow file, due to issues with `resume.pdf` (as seen here: https://github.com/gohugoio/hugo/issues/7087). Remember to run `hugo build --minify` before each push to make sure that the correctly edited files are being built.
+
 # Notes: 
 
 Creating a new post: `hugo new posts/name-of-post.md`
