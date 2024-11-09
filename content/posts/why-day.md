@@ -1,7 +1,7 @@
 ---
 title: "_Why Day, and a really old MS-DOS project"
 date: 2022-08-19T05:59:05-05:00
-draft: false
+draft: true
 tags: ["2022"]
 ---
 

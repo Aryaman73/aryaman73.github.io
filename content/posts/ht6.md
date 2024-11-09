@@ -1,7 +1,7 @@
 ---
 title: "HackThe6ix 2022 🥇"
 date: 2022-08-23T12:45:15-05:00
-draft: false
+draft: true
 tags: ["2022", "technical"]
 ---
 
