@@ -1,7 +1,9 @@
-baseURL: https://aryaman73.github.io #TODO: should this be aryamans.me?
+baseURL: https://aryaman73.github.io
 languageCode: en-us
 title: aryamans.me
 theme: PaperMod
+
+# TODO: should baseUrl this be aryamans.me?
 
 params:
   homeInfoParams:

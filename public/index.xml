@@ -1,28 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>aryamans.me</title>
-    <link>http://localhost:1313/</link>
-    <description>Recent content on aryamans.me</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 12 Nov 2023 01:05:43 -0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>J1 International Student Guide</title>
-      <link>http://localhost:1313/posts/j1-visa-guide/</link>
-      <pubDate>Sun, 12 Nov 2023 01:05:43 -0800</pubDate>
-      <guid>http://localhost:1313/posts/j1-visa-guide/</guid>
-      <description>In many ways, getting the visa for my US internship was harder than getting the internship itself - after all, there is no Leetcode to help you get through USCIS bureaucracy. Though there is some information online, it can feel scattered and hard to find. This is particularly true for non-Canadian citizens since we have an additional interview at the US Consulate. That’s where this guide (hopefully) comes in.
-Before I begin, here are some excellent guides made by other UW students you may want to check out as well:</description>
-    </item>
-    <item>
-      <title>React Zendesk, and components that lie</title>
-      <link>http://localhost:1313/posts/react-zendesk/</link>
-      <pubDate>Fri, 07 Jan 2022 22:34:48 -0500</pubDate>
-      <guid>http://localhost:1313/posts/react-zendesk/</guid>
-      <description>Zendesk is a very popular cloud-based customer service platform that lets you implement chatbots and CRM systems easily - but you probably recognize them from these buttons at the bottom-right of many websites:
-If you’ve ever wanted to implement this on a React app, you’ve probably encountered React Zendesk, which attempts to convert Zendesk&amp;rsquo;s widget into a React Component. It has over 10k weekly downloads and a bunch of references online, but it is far from official.</description>
-    </item>
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>aryamans.me</title><link>https://aryaman73.github.io/</link><description>Recent content on aryamans.me</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 12 Nov 2023 01:05:43 -0800</lastBuildDate><atom:link href="https://aryaman73.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>J1 International Student Guide</title><link>https://aryaman73.github.io/posts/j1-visa-guide/</link><pubDate>Sun, 12 Nov 2023 01:05:43 -0800</pubDate><guid>https://aryaman73.github.io/posts/j1-visa-guide/</guid><description>In many ways, getting the visa for my US internship was harder than getting the internship itself - after all, there is no Leetcode to help you get through USCIS bureaucracy. Though there is some information online, it can feel scattered and hard to find. This is particularly true for non-Canadian citizens since we have an additional interview at the US Consulate. That’s where this guide (hopefully) comes in.
+Before I begin, here are some excellent guides made by other UW students you may want to check out as well:</description></item><item><title>React Zendesk, and components that lie</title><link>https://aryaman73.github.io/posts/react-zendesk/</link><pubDate>Fri, 07 Jan 2022 22:34:48 -0500</pubDate><guid>https://aryaman73.github.io/posts/react-zendesk/</guid><description>Zendesk is a very popular cloud-based customer service platform that lets you implement chatbots and CRM systems easily - but you probably recognize them from these buttons at the bottom-right of many websites:
+If you’ve ever wanted to implement this on a React app, you’ve probably encountered React Zendesk, which attempts to convert Zendesk&amp;rsquo;s widget into a React Component. It has over 10k weekly downloads and a bunch of references online, but it is far from official.</description></item></channel></rss>
