@@ -6,8 +6,10 @@ URL: aryaman73.github.io & aryamans.me
 
 Domain thanks to: namecheap.me
 
-### WARNING: Build step disabled
-I have disabled the Build step in the GitHub workflow file, due to issues with `resume.pdf` (as seen here: https://github.com/gohugoio/hugo/issues/7087). Remember to run `hugo --minify` before each push to make sure that the correctly edited files are being built.
+### Deployment
+Pushing to `master` triggers `.github/workflows/gh-pages.yml`, which builds the site with `hugo --minify` and deploys to GitHub Pages. **No need to build locally or commit `public/`** — that is gitignored and produced by CI. (The old `resume.pdf` build issue, https://github.com/gohugoio/hugo/issues/7087, is fixed in modern Hugo.)
+
+To preview locally: `hugo server -D` (`-D` shows drafts).
 
 # Notes: 
 
