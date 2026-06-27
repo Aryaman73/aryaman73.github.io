@@ -1,7 +1,7 @@
 ---
 title: "My UWaterloo Story (Year 1)"
 date: 2021-03-08T22:59:05-05:00
-draft: true
+draft: false
 tags: ["UW"]
 ---
 
