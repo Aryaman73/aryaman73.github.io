@@ -7,7 +7,7 @@ Live at `aryaman73.github.io` and `aryamans.me` (custom domain via Namecheap; se
 
 | Path | Purpose |
 |------|---------|
-| `config.yml` | Hugo site config (PaperMod). Home blurb, social icons, nav menu, `baseURL`. |
+| `config.yml` | Hugo site config (PaperMod). Home blurb, social icons, nav menu, `baseURL`. `params.mainSections: [none]` deliberately keeps blog posts OFF the home page — they're reached via the "blog" nav link (`/posts/`). The home page shows only the `homeInfoParams` intro. |
 | `content/posts/*.md` | Blog posts (one markdown file each). Front matter controls `title`, `date`, `draft`, `tags`. |
 | `content/posts/<slug>/*.png` | Per-post images (page-bundle style, referenced as `../<slug>/file.png`). |
 | `content/resume.pdf` | Résumé, served at `/resume.pdf` (linked from nav menu). |

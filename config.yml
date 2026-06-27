@@ -6,6 +6,12 @@ theme: PaperMod
 # TODO: should baseUrl this be aryamans.me?
 
 params:
+  # Don't list blog posts on the home page; they live at /posts/ (see "blog" nav
+  # link). Pointing mainSections at a non-existent section empties the home list
+  # without touching the theme. The /posts/ page lists all posts regardless.
+  mainSections:
+    - none
+
   homeInfoParams:
     Title: "Hey! \U0001F44B"
     Content: >
@@ -39,6 +45,10 @@ params:
 
 menu:
   main:
+    - identifier: blog
+      name: blog
+      url: /posts/
+      weight: "10"
     - identifier: tags
       name: tags
       url: /tags/
