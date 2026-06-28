@@ -1,0 +1,121 @@
+%==============================================================================
+% Aryaman Singh — Résumé
+% Editable source. Build with:  tectonic resume.tex
+%==============================================================================
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[default]{lato}   % sans-serif body font (close to the original)
+\usepackage[margin=0.5in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage[hidelinks]{hyperref}
+
+% --- Colors -------------------------------------------------------------------
+\definecolor{accent}{HTML}{6B2FA0}   % purple used for name + section rules
+\definecolor{linkcol}{HTML}{6B2FA0}
+\hypersetup{colorlinks=true, urlcolor=linkcol, linkcolor=linkcol}
+
+% --- Layout tweaks ------------------------------------------------------------
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+\raggedbottom
+
+% Section heading: small-caps accent label followed by a rule across the page
+\titleformat{\section}
+  {\color{accent}\large\bfseries\scshape}
+  {}{0em}{}[\color{accent}\titlerule]
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+
+% Compact bullet lists
+\newlist{tight}{itemize}{1}
+\setlist[tight]{leftmargin=1.4em, topsep=1pt, itemsep=1pt, parsep=0pt, label=\textbullet}
+
+% --- Helper macros ------------------------------------------------------------
+% \entry{Role / heading}{Right-aligned date or location}
+\newcommand{\entry}[2]{%
+  \noindent\begin{tabularx}{\linewidth}{@{}X r@{}}
+    #1 & #2 \\
+  \end{tabularx}%
+}
+
+\begin{document}
+
+%--- Header -------------------------------------------------------------------
+\begin{center}
+  {\Huge\bfseries \textcolor{accent}{ARYAMAN} SINGH}\\[4pt]
+  \small
+  +1 (226) 978-7947 \quad\textbar\quad
+  \href{mailto:aryaman.singh@uwaterloo.ca}{aryaman.singh@uwaterloo.ca} \quad\textbar\quad
+  \href{https://linkedin.com/in/aryamans}{linkedin.com/in/aryamans} \quad\textbar\quad
+  \href{https://github.com/Aryaman73}{github.com/Aryaman73} \quad\textbar\quad
+  \href{https://www.aryamans.me}{www.aryamans.me}
+\end{center}
+
+%--- Education ----------------------------------------------------------------
+\section{Education}
+\entry{\textbf{Computer Engineering (BASc), University of Waterloo} (GPA: 3.9)}{Sep 2019 -- Apr 2024 (expected)}\\[2pt]
+\textbf{Relevant Courses:} Software Design \& Arch. (97\%), Real-Time Operating Systems (92\%), Algorithms \& Data Structures (99\%)\\
+\textbf{Activities:} ECE Society Coordinator, EngSoc Website Director, WEC Technical Director, Strategy Volunteer @ Midnight Sun\\
+\textbf{Awards:} 4x Dean's Honors List, Konrad Digital Innovation Scholarship, SFF Programming Competition Award + 5 more
+
+%--- Skills -------------------------------------------------------------------
+\section{Skills}
+\textbf{Languages:} JavaScript, TypeScript, Python, Ruby, Java, C++, C, HTML, CSS\\
+\textbf{Tools:} React, NodeJS, Rails, GraphQL, Azure, GCP, AWS, MySQL, Postgres, Jenkins, Terraform, Slurm, Kubernetes, Unix, Git
+
+%--- Work Experience ----------------------------------------------------------
+\section{Work Experience}
+
+\entry{\textbf{Tesla} -- Software Engineer Intern (Firmware Build \& Infra) -- Palo Alto, CA}{Sep 2023 -- Jan 2024}
+\begin{tight}
+  \item Developed a git merge graph utility to visualize and detect merge conflicts using TypeScript, Python, and the GitHub Apps framework, resulting in a 75\% reduction in release build times and optimizing CPU usage from 128 cores to 8 cores
+  \item Engineered a workflow for parallelized repository clones using Kubernetes \& Artifactory, reducing server setup times by 60\%
+\end{tight}
+
+\entry{\textbf{Tesla} -- Software Engineer Intern (Firmware Build \& Infra) -- Palo Alto, CA}{Jan 2023 -- Apr 2023}
+\begin{tight}
+  \item Revamped firmware infrastructure by enhancing CI build configurability and performance through JSON Support using Python, Ruby on Rails and Jenkins, empowering teams at Tesla to configure and manage their own build processes
+  \item Implemented specific build exclusions in Python to allow developers to define specific vehicle components to be built per build, thus reducing Jenkins job times by 25\%
+\end{tight}
+
+\entry{\textbf{Relay Platform} -- Software Developer Intern -- Toronto, ON}{Jan 2022 -- Apr 2022}
+\begin{tight}
+  \item Engineered a data-ingestion platform for insurance firms using React \& TypeScript to reduce onboarding time by increasing ingestion rate of new insurance applications by 100 times
+  \item Created an AWS Lambda pipeline to sanitize \& analyze insurance data using NodeJS \& Terraform to lower costs for clients
+\end{tight}
+
+\entry{\textbf{Versett} -- Full Stack Product Engineer Intern -- Toronto, ON}{May 2021 -- Dec 2021}
+\begin{tight}
+  \item Architected visual components for a medical mobility device company using React, GraphQL and Strapi, working autonomously with the designers and client to ensure accessibility across the app \href{https://motioncares.ca}{[motioncares.ca]}
+  \item Overhauled UI, database, and authentication features for a digital-only insurance product using Node.js and React, launching the app in Barbados to 1000+ customers \href{https://almi.bb}{[almi.bb]}
+\end{tight}
+
+\entry{\textbf{Telus} -- Software Developer Intern -- Cambridge, ON}{Sep 2020 -- Dec 2020}
+\begin{tight}
+  \item Spearheaded implementations of new functional testing frameworks using Python (Robot Framework), reducing regression testing time for new releases from 2 weeks to 1 week
+  \item Automated nightly testing suites on Jenkins to support dev team with stability issues in 3 separate EMR applications
+\end{tight}
+
+\entry{\textbf{PointClickCare} -- Software Engineer Intern -- Mississauga, ON}{Jan 2020 -- Apr 2020}
+\begin{tight}
+  \item Designed a load testing application using Apache JMeter for a Microsoft Azure pipeline, responsible for ingesting and storing changes made to patient health records and prescriptions
+  \item Implemented 50+ automation tests and bug fixes using Java, increasing automation coverage of the application by 5 times
+\end{tight}
+
+%--- Projects -----------------------------------------------------------------
+\section{Projects}
+
+\entry{\textbf{AeView, HackRx '23} -- \href{https://github.com/jx-zheng/aeview}{github.com/jx-zheng/aeview}}{Jul 2023}
+\begin{tight}
+  \item Created an AR mobile app that allows doctors to virtually landmark a patient's body for drug administration, using Apple ARKit, RealityKit and SwiftUI; won \textbf{1st place} at the hackathon and a \$5000 cash prize.
+\end{tight}
+
+\entry{\textbf{HeimWallet, HackThe6ix} -- \href{https://devpost.com/software/heimwallet}{devpost.com/software/heimwallet}}{Aug 2022}
+\begin{tight}
+  \item Developed a digital wallet and payment verification app for Alzheimer's patients using React Native and Python Flask with Twilio notification and Google Maps API location support; won \textbf{1st place} at the hackathon out of 70+ submissions.
+\end{tight}
+
+\end{document}
