@@ -13,6 +13,8 @@
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{xcolor}
+\usepackage{contour}            % lets us thicken the name without a heavier font
+\contourlength{0.5pt}           % stroke width on the title (bigger = bolder)
 \usepackage{tabularx}
 \usepackage[hidelinks]{hyperref}
 
@@ -48,7 +50,7 @@
 
 %--- Header -------------------------------------------------------------------
 \begin{center}
-  {\Huge\bfseries \textcolor{accent}{ARYAMAN} SINGH}\\[4pt]
+  {\Huge\bfseries \textcolor{accent}{\contour{accent}{ARYAMAN}} \contour{black}{SINGH}}\\[4pt]
   \small
   +1 (226) 978-7947 \quad\textbar\quad
   \href{mailto:aryaman.singh@uwaterloo.ca}{aryaman.singh@uwaterloo.ca} \quad\textbar\quad
