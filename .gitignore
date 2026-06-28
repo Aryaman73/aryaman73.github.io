@@ -4,3 +4,7 @@
 /public/
 /resources/
 .hugo_build.lock
+
+# LaTeX build logs
+resume/*.log
+resume_backups/*.log
