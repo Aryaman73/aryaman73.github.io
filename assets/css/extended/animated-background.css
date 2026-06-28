@@ -1,0 +1,56 @@
+/* ===========================================================================
+   Animated "aurora" background
+   - Drifting, blurred color blobs behind all content.
+   - Mode-aware: softer/paler in light mode, a touch more vivid in dark mode
+     (PaperMod toggles a `.dark` class on <body>).
+   - Sits at z-index -1 so it paints over the base background color but under
+     all page content, keeping text fully readable.
+   - Respects prefers-reduced-motion (animation disabled, static blobs remain).
+   =========================================================================== */
+
+:root {
+  --aurora-1: rgba(124, 58, 237, 0.22);  /* purple */
+  --aurora-2: rgba(56, 130, 246, 0.18);  /* blue   */
+  --aurora-3: rgba(16, 185, 129, 0.15);  /* teal   */
+  --aurora-blur: 60px;
+}
+
+body.dark {
+  --aurora-1: rgba(149, 102, 255, 0.30);
+  --aurora-2: rgba(56, 189, 248, 0.22);
+  --aurora-3: rgba(45, 212, 191, 0.18);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -10vmax;                 /* overscan so blurred edges never show seams */
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-image:
+    radial-gradient(38vmax 38vmax at 18% 22%, var(--aurora-1), transparent 60%),
+    radial-gradient(34vmax 34vmax at 82% 28%, var(--aurora-2), transparent 60%),
+    radial-gradient(42vmax 42vmax at 50% 85%, var(--aurora-3), transparent 60%);
+  filter: blur(var(--aurora-blur)) saturate(125%);
+  animation: aurora-drift 26s ease-in-out infinite alternate;
+  will-change: background-position;
+}
+
+@keyframes aurora-drift {
+  0% {
+    background-position: 0% 0%, 100% 0%, 50% 100%;
+  }
+  50% {
+    background-position: 25% 35%, 65% 45%, 35% 60%;
+  }
+  100% {
+    background-position: 10% 60%, 85% 20%, 60% 90%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+}
