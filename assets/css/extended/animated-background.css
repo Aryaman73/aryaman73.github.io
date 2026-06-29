@@ -1,24 +1,23 @@
 /* ===========================================================================
    Animated "aurora" background
-   - Large, drifting, blurred purple/blue blobs that overlap into a flowing
-     wash behind all content.
-   - Mode-aware: softer in light mode, more vivid in dark mode (PaperMod
-     toggles a `.dark` class on <body>).
+   - Two large, drifting, blurred blobs (one purple, one blue) that overlap
+     into a flowing wash behind all content.
+   - Mode-aware: darker/more saturated in light mode so they read against the
+     white background; more vivid glow in dark mode (PaperMod toggles a `.dark`
+     class on <body>).
    - Two fixed layers (::before / ::after) sit at z-index -1, painting over the
      base background color but under all page content (text stays readable).
    - PERFORMANCE: motion is driven by `transform` (translate/rotate/scale), NOT
      `background-position`. Transforms are GPU-composited, so the expensive blur
      is rasterized once and merely re-composited each frame — smooth, and it
-     actually moves. (The old background-position approach repainted the whole
-     blurred layer every frame -> janky -> and the gradients filled the box so
-     there was no room to slide -> nothing visibly animated.)
+     actually moves.
    - Respects prefers-reduced-motion (animation disabled, static blobs remain).
    =========================================================================== */
 
 :root {
-  --aurora-1: rgba(124, 58, 237, 0.30);  /* purple */
-  --aurora-2: rgba(56, 130, 246, 0.28);  /* blue   */
-  --aurora-blur: 80px;
+  --aurora-1: rgba(99, 40, 205, 0.42);   /* purple — darker + stronger for light bg */
+  --aurora-2: rgba(33, 102, 220, 0.40);  /* blue   — darker + stronger for light bg */
+  --aurora-blur: 90px;
 }
 
 body.dark {
@@ -40,32 +39,30 @@ body::after {
   will-change: transform;
 }
 
-/* Layer 1: a purple + a blue blob, drifting one way. */
+/* Blob 1: one big purple blob, drifting one way. */
 body::before {
   background-image:
-    radial-gradient(45vmax 45vmax at 28% 32%, var(--aurora-1), transparent 60%),
-    radial-gradient(50vmax 50vmax at 72% 30%, var(--aurora-2), transparent 60%);
+    radial-gradient(80vmax 80vmax at 32% 30%, var(--aurora-1), transparent 62%);
   animation: aurora-a 26s ease-in-out infinite alternate;
 }
 
-/* Layer 2: a second pair, drifting the other way for parallax/cross-blend. */
+/* Blob 2: one big blue blob, drifting the other way for cross-blend. */
 body::after {
   background-image:
-    radial-gradient(48vmax 48vmax at 60% 78%, var(--aurora-1), transparent 60%),
-    radial-gradient(42vmax 42vmax at 30% 68%, var(--aurora-2), transparent 60%);
+    radial-gradient(82vmax 82vmax at 70% 75%, var(--aurora-2), transparent 62%);
   animation: aurora-b 32s ease-in-out infinite alternate;
 }
 
 @keyframes aurora-a {
-  0%   { transform: translate3d(-6%, -4%, 0) rotate(0deg)   scale(1.05); }
-  50%  { transform: translate3d( 5%,  6%, 0) rotate(8deg)   scale(1.15); }
-  100% { transform: translate3d( 8%, -2%, 0) rotate(-6deg)  scale(1.08); }
+  0%   { transform: translate3d(-7%, -5%, 0) rotate(0deg)   scale(1.05); }
+  50%  { transform: translate3d( 6%,  7%, 0) rotate(8deg)   scale(1.18); }
+  100% { transform: translate3d( 9%, -3%, 0) rotate(-6deg)  scale(1.08); }
 }
 
 @keyframes aurora-b {
-  0%   { transform: translate3d( 6%,  5%, 0) rotate(0deg)   scale(1.10); }
-  50%  { transform: translate3d(-5%, -6%, 0) rotate(-10deg) scale(1.18); }
-  100% { transform: translate3d(-8%,  3%, 0) rotate(7deg)   scale(1.06); }
+  0%   { transform: translate3d( 7%,  6%, 0) rotate(0deg)   scale(1.10); }
+  50%  { transform: translate3d(-6%, -7%, 0) rotate(-10deg) scale(1.20); }
+  100% { transform: translate3d(-9%,  4%, 0) rotate(7deg)   scale(1.06); }
 }
 
 @media (prefers-reduced-motion: reduce) {
