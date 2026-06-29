@@ -6,6 +6,12 @@ theme: PaperMod
 # TODO: should baseUrl this be aryamans.me?
 
 params:
+  # GoatCounter analytics (https://www.goatcounter.com). Set this to your site
+  # code — the <code> in https://<code>.goatcounter.com. Leave empty to disable.
+  # The script is injected via layouts/partials/extend_head.html and is skipped
+  # during local `hugo server` previews. Dashboard: https://<code>.goatcounter.com
+  goatCounterCode: "aryamans"
+
   # Default to dark mode (visitors can still toggle to light via the header
   # button). Without this, PaperMod follows the visitor's OS prefers-color-scheme.
   defaultTheme: dark

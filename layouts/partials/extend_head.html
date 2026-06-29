@@ -1,0 +1,13 @@
+{{/*
+  Project-level override of PaperMod's empty extend_head partial.
+  Injects GoatCounter analytics (https://www.goatcounter.com).
+
+  - Only emits the script when params.goatCounterCode is set in config.yml,
+    so it's a no-op until configured.
+  - Skipped during `hugo server` (local previews) so your own page loads
+    don't inflate the live stats.
+*/}}
+{{- if and site.Params.goatCounterCode (not hugo.IsServer) }}
+<script data-goatcounter="https://{{ site.Params.goatCounterCode }}.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+{{- end }}
