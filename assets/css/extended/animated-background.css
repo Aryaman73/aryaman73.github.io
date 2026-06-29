@@ -43,14 +43,14 @@ body::after {
 body::before {
   background-image:
     radial-gradient(80vmax 80vmax at 32% 30%, var(--aurora-1), transparent 62%);
-  animation: aurora-a 26s ease-in-out infinite alternate;
+  animation: aurora-a 13s ease-in-out infinite alternate;
 }
 
 /* Blob 2: one big blue blob, drifting the other way for cross-blend. */
 body::after {
   background-image:
     radial-gradient(82vmax 82vmax at 70% 75%, var(--aurora-2), transparent 62%);
-  animation: aurora-b 32s ease-in-out infinite alternate;
+  animation: aurora-b 16s ease-in-out infinite alternate;
 }
 
 @keyframes aurora-a {
