@@ -5,11 +5,11 @@ draft: false
 tags: ["2026", "technical"]
 ---
 
-I have an [8BitDo Retro Mechanical Keyboard, N Edition](https://www.8bitdo.com/retro-mechanical-keyboard/), the cream-and-grey one that looks like an NES typewriter. It comes with "Super Buttons" that beg to be mapped to *something*. My something was simple: I wanted one of them to fire a single global hotkey so I could trigger [Wispr Flow](https://wisprflow.ai/) dictation without contorting my hand. That's it. One button, one job.
+I have an [8BitDo Retro Mechanical Keyboard, N Edition](https://www.8bitdo.com/retro-mechanical-keyboard/), the cream-and-grey one that looks like an NES typewriter. It comes with "Super Buttons" that beg to be mapped to *something*. My something was simple: I wanted one of them to fire a single global hotkey so I could trigger [Wispr Flow](https://wisprflow.ai/) dictation without contorting my hand.
 
 ![8BitDo Retro Mechanical Keyboard, N Edition](../8bd-config/keyboard.jpg)
 
-The catch: the only software that programs this keyboard is 8BitDo's official Windows app, and I only had a mac. There is a similar software provided by 8BitDo on macOS, but it only works with a certain version of the retro keyboard (that is, of course, more expensive). Same hardware as the standard Retro Mechanical Keyboard, same USB VID/PID, but the app checks the model name at startup and politely refuses. So the official path was to boot a Windows machine or VM, install the app, and use it to remap the keys. I, of course, didn't want to do that. I wanted a native macOS solution.
+The catch: the only software that programs this keyboard is 8BitDo's official Windows app, and I only had a mac. There is a similar software provided by 8BitDo on macOS, but it only works with a certain version of the retro keyboard (that is, of course, more expensive). Same hardware as the standard Retro Mechanical Keyboard, same USB VID/PID, but the app checks the model name at startup and politely refuses. So the official path was to boot a Windows machine or VM, install the app, and use it to remap the keys. I, of course, didn't want to do that - I wanted a native macOS solution.
 
 The usual macOS escape hatch is [Karabiner-Elements](https://karabiner-elements.pqrs.org/), but Karabiner intercepts keys at the OS layer. It's a daemon that has to be running, it remaps *every* keyboard, and it's one more thing to babysit across machines. I didn't want a software shim. I wanted the remap to live **on the keyboard's own firmware**, the way the official app would have done it. So I decided to just talk to the keyboard directly.
 
@@ -33,7 +33,7 @@ node src/cli.ts list-keys   # every hardware key and every mappable target
 node src/cli.ts map capslock esc   # write a remap
 ```
 
-The read path came first because reads are harmless. Worst case you learn nothing. Then the write path, validated against real hardware one careful command at a time. The one genuinely confusing gotcha cost an afternoon: a remap *doesn't take physical effect* until you (1) save it into a **named profile** and (2) press the keyboard's little Profile (heart) button so its LED lights up. An unnamed profile lives only on the PC; a named one only applies while the toggle is on. Once that clicked, remapping became reliable.
+The read path came first because reads are harmless. Worst case you learn nothing. Then the write path, validated against real hardware one careful command at a time. The one genuinely confusing gotcha cost an afternoon: a remap *doesn't take physical effect* until you (1) save it into a **named profile** and (2) press the keyboard's little Profile (heart) button so its LED lights up. An unnamed profile lives only on the PC; a named one only applies while the toggle is on.
 
 I drew two firm lines in the sand and never crossed them: **no macros** (out of scope) and **no firmware flashing**. Flashing is the *only* operation that can actually brick the device, it's AES-locked anyway, and there was zero upside for my one-button goal. Everything I do is reversible by a factory reset. Reverse-engineering your own hardware is a lot more fun when you know you can't brick it.
 
@@ -67,6 +67,6 @@ And then I hit a wall I'm honest about: the Advance protocol uses **64-byte repo
 
 The reflex when a device "isn't supported" is to assume there's a wall. Usually there's just an allowlist, and underneath it the hardware speaks a perfectly ordinary protocol that's been sitting in userland the whole time. The official app wasn't protecting me from anything, it was protecting 8BitDo's product matrix.
 
-Doing this with Claude Code as a partner changed the *pace* more than anything. The de-risking-first instinct (prove macOS HID access works before writing a single feature), the discipline of read-paths before write-paths, decompiling a .NET binary on the wrong OS, and noticing the `07 <mod> <key>` symmetry instead of reaching for a packet capture: that's the kind of work that used to mean a weekend of dead ends. Compressed, it was a couple of focused evenings.
+Doing this with Claude Code as a partner changed the *pace* more than anything. The de-risking-first instinct (prove macOS HID access works before writing a single feature), the discipline of read-paths before write-paths, decompiling a .NET binary on the wrong OS, and noticing the `07 <mod> <key>` symmetry instead of reaching for a packet capture.
 
 The code is a small TypeScript + `node-hid` CLI, GPL-3 (inherited from the upstream protocol work it builds on), and it's [up on GitHub](https://github.com/Aryaman73/8db-retro-config). The eventual plan is an Electron GUI with a clickable keyboard layout so nobody else has to type raw HID usage bytes to get their one button back.
