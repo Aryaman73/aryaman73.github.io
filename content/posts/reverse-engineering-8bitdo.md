@@ -7,6 +7,8 @@ tags: ["2026", "technical"]
 
 I have an [8BitDo Retro Mechanical Keyboard, N Edition](https://www.8bitdo.com/retro-mechanical-keyboard/), the cream-and-grey one that looks like an NES typewriter. It comes with "Super Buttons" that beg to be mapped to *something*. My something was simple: I wanted one of them to fire a single global hotkey so I could trigger [Wispr Flow](https://wisprflow.ai/) dictation without contorting my hand. That's it. One button, one job.
 
+![8BitDo Retro Mechanical Keyboard, N Edition](../8bd-config/keyboard.jpg)
+
 The catch: the only software that programs this keyboard is 8BitDo's official Windows app, and I only had a mac. There is a similar software provided by 8BitDo on macOS, but it only works with a certain version of the retro keyboard (that is, of course, more expensive). Same hardware as the standard Retro Mechanical Keyboard, same USB VID/PID, but the app checks the model name at startup and politely refuses. So the official path was to boot a Windows machine or VM, install the app, and use it to remap the keys. I, of course, didn't want to do that. I wanted a native macOS solution.
 
 The usual macOS escape hatch is [Karabiner-Elements](https://karabiner-elements.pqrs.org/), but Karabiner intercepts keys at the OS layer. It's a daemon that has to be running, it remaps *every* keyboard, and it's one more thing to babysit across machines. I didn't want a software shim. I wanted the remap to live **on the keyboard's own firmware**, the way the official app would have done it. So I decided to just talk to the keyboard directly.
@@ -51,7 +53,7 @@ I mapped the on-board Super A key to `07 e3 04` and pressed it, and macOS receiv
 node src/cli.ts map-combo supera cmd f13   # Super A → ⌘+F13, my dictation hotkey
 ```
 
-⌘+F13 is a chord nothing else on macOS uses, which makes it a perfect dedicated trigger for Wispr Flow, Raycast, or a Shortcuts action. **Goal achieved.** One firmware-level button, no daemon, no Karabiner.
+⌘+F13 is a chord nothing else on macOS uses, which makes it a perfect dedicated trigger for Wispr Flow, Raycast, or a Shortcuts action. 🫡
 
 ## The rabbit hole: the *external* Super Buttons
 
@@ -68,5 +70,3 @@ The reflex when a device "isn't supported" is to assume there's a wall. Usually 
 Doing this with Claude Code as a partner changed the *pace* more than anything. The de-risking-first instinct (prove macOS HID access works before writing a single feature), the discipline of read-paths before write-paths, decompiling a .NET binary on the wrong OS, and noticing the `07 <mod> <key>` symmetry instead of reaching for a packet capture: that's the kind of work that used to mean a weekend of dead ends. Compressed, it was a couple of focused evenings.
 
 The code is a small TypeScript + `node-hid` CLI, GPL-3 (inherited from the upstream protocol work it builds on), and it's [up on GitHub](https://github.com/Aryaman73/8db-retro-config). The eventual plan is an Electron GUI with a clickable keyboard layout so nobody else has to type raw HID usage bytes to get their one button back.
-
-One button. Worth every minute.
