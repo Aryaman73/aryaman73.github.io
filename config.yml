@@ -6,6 +6,10 @@ theme: PaperMod
 # TODO: should baseUrl this be aryamans.me?
 
 params:
+  # Default to dark mode (visitors can still toggle to light via the header
+  # button). Without this, PaperMod follows the visitor's OS prefers-color-scheme.
+  defaultTheme: dark
+
   # Don't list blog posts on the home page; they live at /posts/ (see "blog" nav
   # link). Pointing mainSections at a non-existent section empties the home list
   # without touching the theme. The /posts/ page lists all posts regardless.
