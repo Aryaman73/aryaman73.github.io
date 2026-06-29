@@ -1,51 +1,51 @@
 /* ===========================================================================
    Animated "aurora" background
-   - Drifting, blurred color blobs behind all content.
-   - Mode-aware: softer/paler in light mode, a touch more vivid in dark mode
-     (PaperMod toggles a `.dark` class on <body>).
+   - Large, drifting, heavily-blurred purple/blue blobs that overlap into a
+     flowing wash behind all content.
+   - Mode-aware: softer in light mode, more vivid in dark mode (PaperMod
+     toggles a `.dark` class on <body>).
    - Sits at z-index -1 so it paints over the base background color but under
      all page content, keeping text fully readable.
    - Respects prefers-reduced-motion (animation disabled, static blobs remain).
    =========================================================================== */
 
 :root {
-  --aurora-1: rgba(124, 58, 237, 0.22);  /* purple */
-  --aurora-2: rgba(56, 130, 246, 0.18);  /* blue   */
-  --aurora-3: rgba(16, 185, 129, 0.15);  /* teal   */
-  --aurora-blur: 60px;
+  --aurora-1: rgba(124, 58, 237, 0.28);  /* purple */
+  --aurora-2: rgba(56, 130, 246, 0.26);  /* blue   */
+  --aurora-blur: 90px;
 }
 
 body.dark {
-  --aurora-1: rgba(149, 102, 255, 0.30);
-  --aurora-2: rgba(56, 189, 248, 0.22);
-  --aurora-3: rgba(45, 212, 191, 0.18);
+  --aurora-1: rgba(149, 102, 255, 0.38);
+  --aurora-2: rgba(70, 150, 255, 0.32);
 }
 
 body::before {
   content: "";
   position: fixed;
-  inset: -10vmax;                 /* overscan so blurred edges never show seams */
+  inset: -25vmax;                 /* big overscan so blurred edges never show seams */
   z-index: -1;
   pointer-events: none;
   background-repeat: no-repeat;
   background-image:
-    radial-gradient(38vmax 38vmax at 18% 22%, var(--aurora-1), transparent 60%),
-    radial-gradient(34vmax 34vmax at 82% 28%, var(--aurora-2), transparent 60%),
-    radial-gradient(42vmax 42vmax at 50% 85%, var(--aurora-3), transparent 60%);
-  filter: blur(var(--aurora-blur)) saturate(125%);
-  animation: aurora-drift 26s ease-in-out infinite alternate;
+    radial-gradient(65vmax 65vmax at 20% 25%, var(--aurora-1), transparent 62%),
+    radial-gradient(70vmax 70vmax at 82% 28%, var(--aurora-2), transparent 62%),
+    radial-gradient(60vmax 60vmax at 55% 85%, var(--aurora-1), transparent 62%),
+    radial-gradient(58vmax 58vmax at 35% 60%, var(--aurora-2), transparent 62%);
+  filter: blur(var(--aurora-blur)) saturate(135%);
+  animation: aurora-drift 8s ease-in-out infinite alternate;
   will-change: background-position;
 }
 
 @keyframes aurora-drift {
   0% {
-    background-position: 0% 0%, 100% 0%, 50% 100%;
+    background-position: 0% 0%, 100% 0%, 50% 100%, 30% 50%;
   }
   50% {
-    background-position: 25% 35%, 65% 45%, 35% 60%;
+    background-position: 45% 55%, 55% 35%, 25% 45%, 70% 30%;
   }
   100% {
-    background-position: 10% 60%, 85% 20%, 60% 90%;
+    background-position: 15% 75%, 85% 5%, 75% 90%, 20% 70%;
   }
 }
 
