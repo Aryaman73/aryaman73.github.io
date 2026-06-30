@@ -43,8 +43,8 @@
   }
 
   function tick() {
-    cx += (tx - cx) * 0.15;   // ease toward the pointer for a gentle trail
-    cy += (ty - cy) * 0.15;
+    cx += (tx - cx) * 0.4;   // ease toward the pointer (higher = tighter follow)
+    cy += (ty - cy) * 0.4;
     glow.style.transform = "translate3d(" + cx + "px, " + cy + "px, 0)";
     requestAnimationFrame(tick);
   }
