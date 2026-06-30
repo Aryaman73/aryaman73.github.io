@@ -12,9 +12,11 @@ params:
   # during local `hugo server` previews. Dashboard: https://<code>.goatcounter.com
   goatCounterCode: "aryamans"
 
-  # Default to dark mode (visitors can still toggle to light via the header
-  # button). Without this, PaperMod follows the visitor's OS prefers-color-scheme.
+  # Force dark mode only: default to dark AND hide the header toggle button so
+  # the site is always shown in dark. Without defaultTheme, PaperMod would
+  # follow the visitor's OS prefers-color-scheme.
   defaultTheme: dark
+  disableThemeToggle: true
 
   # Don't list blog posts on the home page; they live at /posts/ (see "blog" nav
   # link). Pointing mainSections at a non-existent section empties the home list
