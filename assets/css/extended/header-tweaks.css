@@ -1,0 +1,6 @@
+/* Hide PaperMod's language switcher. This is a single-language site, so the
+   switcher renders nothing but an orphaned "|" separator next to the logo
+   (especially now that the dark/light toggle is disabled). */
+.lang-switch {
+  display: none;
+}
