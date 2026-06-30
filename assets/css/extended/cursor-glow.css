@@ -1,0 +1,56 @@
+/* ===========================================================================
+   Cursor glow
+   - A soft, blurred orb that trails the pointer, echoing the aurora palette
+     (purple in light mode, brighter violet in dark). See animated-background.css.
+   - A single fixed element (#cursor-glow) painted at z-index 0 under content but
+     above the aurora layers (which sit at -1). pointer-events: none so it never
+     intercepts clicks/hovers.
+   - Positioned via a translate3d transform driven by JS (see extend_head.html);
+     transforms are GPU-composited so the blur is rasterized once and only
+     re-composited each frame — cheap and smooth.
+   - Hidden until the first real mouse move (.is-visible) so it doesn't flash at
+     the top-left on load, and on touch/coarse-pointer devices entirely.
+   - Respects prefers-reduced-motion (glow disabled).
+   =========================================================================== */
+
+:root {
+  --cursor-glow: rgba(99, 40, 205, 0.45);   /* purple — matches aurora light mode */
+}
+
+body.dark {
+  --cursor-glow: rgba(149, 102, 255, 0.50); /* brighter violet for dark mode */
+}
+
+#cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 320px;
+  margin: -160px 0 0 -160px;          /* center the orb on the pointer */
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--cursor-glow), transparent 70%);
+  filter: blur(18px);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  will-change: transform, opacity;
+}
+
+#cursor-glow.is-visible {
+  opacity: 1;
+}
+
+/* Touch / coarse-pointer devices have no hovering cursor — don't show it. */
+@media (hover: none), (pointer: coarse) {
+  #cursor-glow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #cursor-glow {
+    display: none;
+  }
+}
