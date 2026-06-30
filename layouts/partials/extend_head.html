@@ -30,6 +30,7 @@
   // Target = latest pointer position; current = eased position we render.
   var tx = 0, ty = 0, cx = 0, cy = 0;
   var seen = false;
+  var running = false;
 
   function onMove(e) {
     tx = e.clientX;
@@ -40,25 +41,51 @@
       seen = true;
       glow.classList.add("is-visible");
     }
+    // Wake the rAF loop only while there's catching-up to do (see tick()).
+    if (!running) {
+      running = true;
+      requestAnimationFrame(tick);
+    }
   }
 
   function tick() {
     cx += (tx - cx) * 0.4;   // ease toward the pointer (higher = tighter follow)
     cy += (ty - cy) * 0.4;
     glow.style.transform = "translate3d(" + cx + "px, " + cy + "px, 0)";
+    // Stop once we've effectively reached the pointer — no point compositing
+    // every frame while the mouse is idle. onMove() restarts us on movement.
+    if (Math.abs(tx - cx) < 0.5 && Math.abs(ty - cy) < 0.5) {
+      running = false;
+      return;
+    }
     requestAnimationFrame(tick);
+  }
+
+  // Grow + shift color when the pointer is over something interactive.
+  var INTERACTIVE = "a, button, input, textarea, select, summary, label, [role='button'], [onclick]";
+  function onOver(e) {
+    if (e.target.closest && e.target.closest(INTERACTIVE)) {
+      glow.classList.add("is-hovering");
+    }
+  }
+  function onOut(e) {
+    if (e.target.closest && e.target.closest(INTERACTIVE)) {
+      glow.classList.remove("is-hovering");
+    }
   }
 
   function start() {
     document.body.appendChild(glow);
     window.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("mouseover", onOver, { passive: true });
+    document.addEventListener("mouseout", onOut, { passive: true });
     document.addEventListener("mouseleave", function () {
       glow.classList.remove("is-visible");
     });
     document.addEventListener("mouseenter", function () {
       if (seen) glow.classList.add("is-visible");
     });
-    requestAnimationFrame(tick);
+    // The rAF loop is started on demand by onMove (and stops when idle).
   }
 
   if (document.body) start();

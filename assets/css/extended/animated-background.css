@@ -1,68 +1,75 @@
 /* ===========================================================================
    Animated "aurora" background
-   - Two large, drifting, blurred blobs (one purple, one blue) that overlap
-     into a flowing wash behind all content.
+   - Two large, drifting, blurred purple blobs that overlap into a flowing wash
+     behind all content.
    - Mode-aware: darker/more saturated in light mode so they read against the
-     white background; more vivid glow in dark mode (PaperMod toggles a `.dark`
+     white background; brighter glow in dark mode (PaperMod toggles a `.dark`
      class on <body>).
    - Two fixed layers (::before / ::after) sit at z-index -1, painting over the
      base background color but under all page content (text stays readable).
    - PERFORMANCE: motion is driven by `transform` (translate/rotate/scale), NOT
-     `background-position`. Transforms are GPU-composited, so the expensive blur
-     is rasterized once and merely re-composited each frame — smooth, and it
-     actually moves.
+     `background-position`, and there's no mix-blend-mode — transforms are
+     GPU-composited, so the expensive blur is rasterized once and merely
+     re-composited each frame.
    - Respects prefers-reduced-motion (animation disabled, static blobs remain).
    =========================================================================== */
 
 :root {
-  --aurora-1: rgba(99, 40, 205, 0.42);   /* purple — darker + stronger for light bg */
-  --aurora-2: rgba(33, 102, 220, 0.40);  /* blue   — darker + stronger for light bg */
-  --aurora-blur: 90px;
+  --aurora-1: rgba(124, 32, 230, 0.44);  /* purple — darker + stronger for light bg */
+  --aurora-2: rgba(96, 48, 220, 0.40);   /* purple (cooler shade) */
+  --aurora-blur: 55px;
 }
 
 body.dark {
-  --aurora-1: rgba(149, 102, 255, 0.40);
-  --aurora-2: rgba(70, 150, 255, 0.34);
+  --aurora-1: rgba(168, 110, 255, 0.46);
+  --aurora-2: rgba(140, 96, 255, 0.40);
 }
 
 /* Shared base for both blob layers. Each layer is larger than the viewport so
-   it can be translated/rotated freely without ever exposing an empty edge. */
+   it can be translated/rotated freely without ever exposing an empty edge.
+   PERF: the blur radius and layer size are kept modest — a fixed, blurred layer
+   this large is a big GPU texture, so blowing it up further (or blurring it
+   more) is the main thing that makes this effect expensive. The soft gradient
+   falloff does most of the smoothing; the blur just removes banding. */
 body::before,
 body::after {
   content: "";
   position: fixed;
-  inset: -40vmax;
+  inset: -25vmax;
   z-index: -1;
   pointer-events: none;
   background-repeat: no-repeat;
-  filter: blur(var(--aurora-blur)) saturate(135%);
+  filter: blur(var(--aurora-blur)) saturate(140%);
   will-change: transform;
 }
 
 /* Blob 1: one big purple blob, drifting one way. */
 body::before {
   background-image:
-    radial-gradient(80vmax 80vmax at 32% 30%, var(--aurora-1), transparent 62%);
-  animation: aurora-a 13s ease-in-out infinite alternate;
+    radial-gradient(78vmax 78vmax at 30% 28%, var(--aurora-1), transparent 60%);
+  animation: aurora-a 17s ease-in-out infinite alternate;
 }
 
-/* Blob 2: one big blue blob, drifting the other way for cross-blend. */
+/* Blob 2: a second purple blob, drifting the other way for cross-blend. */
 body::after {
   background-image:
-    radial-gradient(82vmax 82vmax at 70% 75%, var(--aurora-2), transparent 62%);
-  animation: aurora-b 16s ease-in-out infinite alternate;
+    radial-gradient(80vmax 80vmax at 72% 74%, var(--aurora-2), transparent 60%);
+  animation: aurora-b 23s ease-in-out infinite alternate;
 }
 
+/* Desynced speeds + a gentle "breathing" scale keep it organic, not linear.
+   Scale range is kept small — large scale-ups on a blurred layer force the GPU
+   to re-rasterize that expensive blur. */
 @keyframes aurora-a {
-  0%   { transform: translate3d(-7%, -5%, 0) rotate(0deg)   scale(1.05); }
-  50%  { transform: translate3d( 6%,  7%, 0) rotate(8deg)   scale(1.18); }
-  100% { transform: translate3d( 9%, -3%, 0) rotate(-6deg)  scale(1.08); }
+  0%   { transform: translate3d(-7%, -5%, 0) rotate(0deg)   scale(1.04); }
+  50%  { transform: translate3d( 6%,  7%, 0) rotate(8deg)   scale(1.10); }
+  100% { transform: translate3d( 9%, -3%, 0) rotate(-6deg)  scale(1.06); }
 }
 
 @keyframes aurora-b {
-  0%   { transform: translate3d( 7%,  6%, 0) rotate(0deg)   scale(1.10); }
-  50%  { transform: translate3d(-6%, -7%, 0) rotate(-10deg) scale(1.20); }
-  100% { transform: translate3d(-9%,  4%, 0) rotate(7deg)   scale(1.06); }
+  0%   { transform: translate3d( 7%,  6%, 0) rotate(0deg)   scale(1.06); }
+  50%  { transform: translate3d(-6%, -7%, 0) rotate(-10deg) scale(1.11); }
+  100% { transform: translate3d(-9%,  4%, 0) rotate(7deg)   scale(1.04); }
 }
 
 @media (prefers-reduced-motion: reduce) {
