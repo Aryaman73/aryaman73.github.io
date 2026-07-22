@@ -1,6 +1,6 @@
 ---
 title: "Reviving Noize: Rebuilding a Dead React App"
-date: 2026-07-22T14:00:00-04:00
+date: 2026-07-22T00:40:00-04:00
 draft: false
 tags: ["2026", "technical", "ai"]
 aiAuthored: true
