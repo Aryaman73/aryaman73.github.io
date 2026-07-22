@@ -3,8 +3,8 @@
    Mirrors the theme's Draft badge: monochrome, currentColor, muted. */
 .ai-badge {
     position: absolute;
-    right: var(--gap);
-    bottom: var(--gap);
+    right: 12px;
+    bottom: 12px;
     color: var(--secondary);
     opacity: 0.65;
     line-height: 0;
