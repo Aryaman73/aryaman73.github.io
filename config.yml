@@ -69,3 +69,7 @@ menu:
       name: resume
       url: /resume.pdf
       weight: "20"
+    - identifier: noize
+      name: noize
+      url: https://www.aryamans.me/noize
+      weight: "30"
