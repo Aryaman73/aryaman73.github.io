@@ -1,5 +1,5 @@
 ---
-title: "Reverse-Engineering the 8bitDo Retro Mechanical Keyboard"
+title: "Reverse-Engineering the 8bitDo Keyboard"
 date: 2026-07-18T14:00:00-04:00
 draft: false
 tags: ["2026", "technical", "ai"]
