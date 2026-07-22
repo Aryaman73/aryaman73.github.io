@@ -1,0 +1,95 @@
+{{- /* Footer custom content area start */ -}}
+
+{{/*
+  Mobile nav — inject the hamburger button and its overlay popup.
+
+  At narrow widths PaperMod's inline #menu wraps below the logo. Rather than
+  fork the theme's header.html, we build the mobile UI here at runtime by
+  cloning the real #menu links (so it stays driven by config.yml's menu.main).
+  Styles live in assets/css/extended/mobile-nav.css.
+*/}}
+<script>
+(function () {
+  function init() {
+    var nav = document.querySelector(".nav");
+    var menu = document.getElementById("menu");
+    if (!nav || !menu) return;
+
+    // --- Hamburger button ---
+    var btn = document.createElement("button");
+    btn.className = "nav-hamburger";
+    btn.setAttribute("aria-label", "Open menu");
+    btn.setAttribute("aria-expanded", "false");
+    btn.setAttribute("aria-controls", "mnav-overlay");
+    btn.innerHTML =
+      '<span class="nav-hamburger-box">' +
+      '<span class="nav-hamburger-bar"></span>' +
+      '<span class="nav-hamburger-bar"></span>' +
+      '<span class="nav-hamburger-bar"></span>' +
+      "</span>";
+    nav.appendChild(btn);
+
+    // --- Overlay + panel, links cloned from the inline #menu ---
+    var overlay = document.createElement("div");
+    overlay.className = "mnav-overlay";
+    overlay.id = "mnav-overlay";
+
+    var panel = document.createElement("nav");
+    panel.className = "mnav-panel";
+    panel.setAttribute("aria-label", "Mobile navigation");
+
+    var list = document.createElement("ul");
+    list.className = "mnav-list";
+    menu.querySelectorAll("li > a").forEach(function (a) {
+      var li = document.createElement("li");
+      li.appendChild(a.cloneNode(true));
+      list.appendChild(li);
+    });
+    panel.appendChild(list);
+    overlay.appendChild(panel);
+    document.body.appendChild(overlay);
+
+    // --- Open / close ---
+    function open() {
+      document.body.classList.add("mnav-open");
+      btn.setAttribute("aria-expanded", "true");
+      btn.setAttribute("aria-label", "Close menu");
+      var first = list.querySelector("a");
+      if (first) first.focus();
+    }
+    function close() {
+      document.body.classList.remove("mnav-open");
+      btn.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-label", "Open menu");
+    }
+    function toggle() {
+      if (document.body.classList.contains("mnav-open")) close();
+      else open();
+    }
+
+    btn.addEventListener("click", toggle);
+    // Click on the dimmed backdrop (but not the panel) closes.
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) close();
+    });
+    // A tapped link navigates; close so we don't return to an open menu.
+    list.addEventListener("click", function (e) {
+      if (e.target.closest("a")) close();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && document.body.classList.contains("mnav-open")) {
+        close();
+        btn.focus();
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+{{- /* Footer custom content area end */ -}}
