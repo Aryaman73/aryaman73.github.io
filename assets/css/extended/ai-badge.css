@@ -1,0 +1,36 @@
+/* Bottom-right corner marker on AI-authored post cards (/posts/ list).
+   Gated in layouts/_default/list.html by the `aiAuthored` front-matter param.
+   Mirrors the theme's Draft badge: monochrome, currentColor, muted. */
+.ai-badge {
+    position: absolute;
+    right: var(--gap);
+    bottom: var(--gap);
+    color: var(--secondary);
+    opacity: 0.65;
+    line-height: 0;
+    pointer-events: none; /* whole card is clickable via .entry-link; don't block it */
+    transition: opacity 0.2s;
+}
+
+.post-entry:hover .ai-badge {
+    opacity: 1;
+}
+
+/* the featured first-entry card has no card padding, so pin to the edge */
+.first-entry .ai-badge {
+    right: 0;
+    bottom: 0;
+}
+
+/* visually hidden, but announced to screen readers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
