@@ -1,0 +1,9 @@
+/* PaperMod's core zmedia.css shrinks --gap (the shared spacing var driving
+   page padding, post-card padding, and inter-element margins) from 24px down
+   to 14px below 768px, which reads as cramped on phones. Ease it back up;
+   this file loads after core.css so it wins the cascade. */
+@media screen and (max-width: 768px) {
+  :root {
+    --gap: 20px;
+  }
+}
