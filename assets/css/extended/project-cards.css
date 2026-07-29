@@ -90,15 +90,6 @@
   opacity: 0.85;
 }
 
-/* Deliberately small — the screenshot and the name carry the card; this is
-   just enough copy to say what the thing is. */
-.project-desc {
-  margin: 10px 0 0;
-  font-size: 0.78rem;
-  line-height: 1.55;
-  color: var(--secondary);
-}
-
 /* ---- Footer links ---- */
 
 .project-links {
