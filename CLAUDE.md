@@ -46,6 +46,12 @@ Also note: the abandoned `origin/hugo-switch-1` branch was a bad earlier fix att
 - Hugo installed locally via Homebrew (`hugo v0.128.0+extended`).
 
 ## Gotchas
+- **Favicons come as a set of five.** PaperMod's `head.html` unconditionally emits five icon
+  links — `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`,
+  `safari-pinned-tab.svg` — all of which must exist in `static/`. Chrome/Arc prefer the
+  explicitly-sized PNGs over the `.ico` and show *no* icon when those 404 rather than falling
+  back (this was the bug fixed 2026-07-29 — only the `.ico` existed). Replacing the icon means
+  regenerating all five.
 - `.DS_Store` files litter the working tree but are gitignored (not tracked) — leave them.
 - External links need the scheme: `[text](https://...)`.
 - Static images: `![alt](/folder/file.png)`. Per-post bundle images: `![alt](../slug/file.png)`.
