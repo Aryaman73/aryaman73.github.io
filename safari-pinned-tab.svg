@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <!-- Safari pinned-tab mask icon: monochrome silhouette of the upside-down
+       face (🙃) used by favicon.ico. Safari recolours this, so it must be a
+       single solid black path; the eyes and mouth are knocked out with
+       fill-rule="evenodd" rather than drawn as separate shapes. -->
+  <path fill="#000" fill-rule="evenodd" d="
+    M 0.4 8 A 7.6 7.6 0 1 1 15.6 8 A 7.6 7.6 0 1 1 0.4 8 Z
+    M 4.4 6.4 Q 8 3.0 11.6 6.4 Q 8 4.6 4.4 6.4 Z
+    M 4.5 9.7 A 1 1 0 1 0 6.5 9.7 A 1 1 0 1 0 4.5 9.7 Z
+    M 9.5 9.7 A 1 1 0 1 0 11.5 9.7 A 1 1 0 1 0 9.5 9.7 Z
+  "/>
+</svg>
