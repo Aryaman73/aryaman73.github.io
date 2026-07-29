@@ -69,11 +69,9 @@ menu:
       name: resume
       url: /resume.pdf
       weight: "20"
-    - identifier: noize
-      name: noize
-      url: https://www.aryamans.me/noize
+    # noize and "pr, please" used to sit here as direct external links; they're
+    # now cards on /projects/ (content/projects.md) so the header stays local.
+    - identifier: projects
+      name: projects
+      url: /projects/
       weight: "30"
-    - identifier: prplease
-      name: pr, please
-      url: https://www.aryamans.me/prplease
-      weight: "40"

@@ -1,0 +1,190 @@
+/* ===========================================================================
+   Project cards — /projects/
+   Rendered by layouts/_default/projects.html from the `projects` list in
+   content/projects.md. Each card is a screenshot, a short write-up and a
+   couple of tag chips; the whole card is one big click target (.project-cover-
+   link stretches over it), with the "source" link lifted back above it.
+
+   Colors come from PaperMod's own vars (--entry, --border, --primary,
+   --secondary, --tertiary) so this stays consistent with the post cards and
+   with the site's forced-dark theme.
+   =========================================================================== */
+
+.project-intro {
+  margin-bottom: calc(var(--gap) * 1.5);
+  color: var(--secondary);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--gap);
+  margin-bottom: calc(var(--gap) * 2);
+}
+
+.project-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  /* Cheap, GPU-composited hover: transform + shadow only, no layout change. */
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.project-card:hover,
+.project-card:focus-within {
+  transform: translateY(-4px);
+  border-color: var(--tertiary);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+}
+
+/* ---- Screenshot ---- */
+
+.project-thumb {
+  position: relative;
+  overflow: hidden;
+  /* Locked to the 16:9 the screenshots are cropped to, so a card's height
+     doesn't jump around while the image loads. */
+  aspect-ratio: 16 / 9;
+  background: var(--tertiary);
+  border-bottom: 1px solid var(--border);
+}
+
+.project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-thumb img,
+.project-card:focus-within .project-thumb img {
+  transform: scale(1.04);
+}
+
+/* ---- Text ---- */
+
+.project-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: calc(var(--gap) * 0.9);
+}
+
+.project-name {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.3;
+  color: var(--primary);
+}
+
+.project-tagline {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: var(--secondary);
+  opacity: 0.85;
+}
+
+.project-desc {
+  margin: 12px 0 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--secondary);
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-tags li {
+  padding: 3px 9px;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: var(--secondary);
+  background: var(--tertiary);
+  border-radius: 999px;
+}
+
+/* ---- Footer links ---- */
+
+.project-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  /* margin-top:auto pins this to the bottom so cards of differing text length
+     still line their links up. */
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Not a real <a> — the card-wide .project-cover-link handles the click; this
+   is the visual affordance for it. */
+.project-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--primary);
+}
+
+.project-cta svg {
+  transition: transform 0.25s ease;
+}
+
+.project-card:hover .project-cta svg,
+.project-card:focus-within .project-cta svg {
+  transform: translateX(4px);
+}
+
+.project-source {
+  position: relative;
+  z-index: 2; /* above .project-cover-link, so it keeps its own click */
+  color: var(--secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.project-source:hover {
+  color: var(--primary);
+}
+
+.project-cover-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.project-cover-link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+  border-radius: var(--radius);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .project-card,
+  .project-thumb img,
+  .project-cta svg {
+    transition: none;
+  }
+
+  .project-card:hover,
+  .project-card:focus-within {
+    transform: none;
+  }
+
+  .project-card:hover .project-thumb img,
+  .project-card:focus-within .project-thumb img {
+    transform: none;
+  }
+}

@@ -1,0 +1,67 @@
+{{- /* Card grid for /projects/. Selected by `layout: projects` in
+       content/projects.md; the cards come from that file's `projects` front
+       matter (see the note there for how to add one). Styling lives in
+       assets/css/extended/project-cards.css. */ -}}
+{{- define "main" }}
+
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}
+  <div class="post-description">{{ . | markdownify }}</div>
+  {{- end }}
+</header>
+
+{{- with .Content }}
+<div class="post-content project-intro">{{ . }}</div>
+{{- end }}
+
+<div class="project-grid">
+  {{- range $p := .Params.projects }}
+  <article class="project-card">
+    {{- with $p.image }}
+    <div class="project-thumb">
+      <img src="{{ . | relURL }}" alt="{{ $p.imageAlt | default $p.name }}" loading="lazy" decoding="async" width="900"
+        height="506">
+    </div>
+    {{- end }}
+
+    <div class="project-body">
+      <h2 class="project-name">{{ .name }}</h2>
+      {{- with .tagline }}
+      <p class="project-tagline">{{ . }}</p>
+      {{- end }}
+      {{- with .description }}
+      <p class="project-desc">{{ . }}</p>
+      {{- end }}
+
+      {{- with .tags }}
+      <ul class="project-tags">
+        {{- range . }}
+        <li>{{ . }}</li>
+        {{- end }}
+      </ul>
+      {{- end }}
+
+      <div class="project-links">
+        <span class="project-cta">
+          visit
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h13" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </span>
+        {{- with .source }}
+        <a class="project-source" href="{{ . }}" rel="noopener">source</a>
+        {{- end }}
+      </div>
+    </div>
+
+    {{- /* Covers the whole card so anywhere on it is clickable; .project-source
+           is lifted above this so it still wins its own clicks. */}}
+    <a class="project-cover-link" href="{{ .url }}" aria-label="{{ .name }}{{ with .tagline }} — {{ . }}{{ end }}"></a>
+  </article>
+  {{- end }}
+</div>
+
+{{- end }}{{- /* end main */ -}}
