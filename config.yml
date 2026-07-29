@@ -3,6 +3,12 @@ languageCode: en-us
 title: aryamans.me
 theme: PaperMod
 
+# Keep auto-generated list titles lowercase — Hugo title-cases them ("Posts",
+# "Tags", and taxonomy terms like "Ai") by default. The nav labels and the
+# /projects/ heading are all lowercase, so match them. Explicit front-matter
+# titles (post titles) are unaffected.
+titleCaseStyle: none
+
 # TODO: should baseUrl this be aryamans.me?
 
 params:
