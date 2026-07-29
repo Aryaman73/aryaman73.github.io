@@ -73,3 +73,7 @@ menu:
       name: noize
       url: https://www.aryamans.me/noize
       weight: "30"
+    - identifier: prplease
+      name: pr, please
+      url: https://www.aryamans.me/prplease
+      weight: "40"
