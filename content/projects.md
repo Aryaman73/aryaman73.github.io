@@ -22,4 +22,10 @@ projects:
     image: /projects/prplease.jpg
     imageAlt: "The PR, Please bulletin view showing the latest Express Entry rounds"
     source: "https://github.com/Aryaman73/prplease"
+  - name: "pomopomo"
+    tagline: "Pomodoro timer & markdown day planner"
+    url: /pomopomo/
+    image: /projects/pomopomo.jpg
+    imageAlt: "The pomopomo screen: a focus timer beside a markdown day planner"
+    source: "https://github.com/Aryaman73/pomopomo"
 ---
