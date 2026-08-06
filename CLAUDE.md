@@ -18,6 +18,34 @@ Live at `aryaman73.github.io` and `aryamans.me` (custom domain via Namecheap; se
 | `public/` | Hugo build output. **Gitignored** — built by CI, not committed. |
 | `.github/workflows/gh-pages.yml` | CI deploy workflow. |
 | `CNAME` (root) + `static/CNAME` | Custom-domain marker for GitHub Pages. |
+| `assets/css/extended/*.css` | Site CSS on top of the theme. See the skin section below. |
+| `layouts/` | Project-level template overrides (see below). |
+
+## The skin — cognitohazardcore
+
+The visual identity: an institutional containment document. Black void, bone-white
+document text, one acid-lime hazard accent (`--hazard`) and one containment red
+(`--alert`), everything monospace and square-cornered, with a CRT overlay and a
+giant slow-turning eye behind the content.
+
+| File | Role |
+|------|------|
+| `assets/css/extended/z1-cognitohazard-tokens.css` | Palette + metrics. Redefines PaperMod's own vars (`--theme`, `--entry`, `--primary`, `--border`, `--radius`) so every stock rule re-skins itself. |
+| `assets/css/extended/z2-cognitohazard-chrome.css` | The iris layer, the CRT overlay, the fixed containment strip, header/nav, footer. |
+| `assets/css/extended/z3-cognitohazard-content.css` | Page headers, home dossier, post cards, article typography, redaction, project cards. |
+| `layouts/partials/home_info.html` | Fork of the theme's — wraps the `homeInfoParams` intro in the dossier frame. |
+| `layouts/shortcodes/redact.html` | `{{</* redact */>}}text{{</* /redact */>}}` — blacked out until hovered/focused. |
+
+Two rules keep it maintainable:
+
+1. **Skin by token, not by rewrite.** Almost nothing here restyles a theme rule
+   directly; it changes the variable the theme rule already reads. The three `z`
+   files are additive on top of `ai-badge.css` / `mobile-nav.css` /
+   `project-cards.css`, which still own layout and structure.
+2. **No template forks for chrome.** The containment strip is built from
+   `.header::before` / `::after`, and the wordmark glitch is faked with animated
+   text-shadows — so neither needed a fork of `header.html`. This follows the same
+   choice `extend_footer.html` made for the mobile nav.
 
 ## How content flows
 
@@ -46,6 +74,14 @@ Also note: the abandoned `origin/hugo-switch-1` branch was a bad earlier fix att
 - Hugo installed locally via Homebrew (`hugo v0.128.0+extended`).
 
 ## Gotchas
+- **Extended CSS is concatenated in filename order.** PaperMod's `head.html` does
+  `resources.Match "css/extended/*.css"`, so a file that needs to win the cascade
+  has to sort after the one it's overriding — that's the only reason the skin
+  files are `z`-prefixed. Renaming them silently breaks the overrides.
+- **`html` paints the page background, not `body`.** The skin needs both body
+  pseudo-elements for its atmosphere layers, so `z2` moves the background up to
+  `html` and makes `body` (including PaperMod's `.list` variant) transparent.
+  Setting a background on `body` again will bury the iris.
 - **Favicons come as a set of five.** PaperMod's `head.html` unconditionally emits five icon
   links — `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`,
   `safari-pinned-tab.svg` — all of which must exist in `static/`. Chrome/Arc prefer the

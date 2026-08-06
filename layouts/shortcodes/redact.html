@@ -1,0 +1,10 @@
+{{- /* {{< redact >}}classified text{{< /redact >}}
+
+       Blacks a span of text out; hovering or tab-focusing it lifts the
+       redaction. Part of the cognitohazardcore skin — styling is `.redacted` in
+       assets/css/extended/z3-cognitohazard-content.css.
+
+       The text stays in the DOM (rather than being replaced with block
+       characters) so it's still searchable, copyable and reachable by screen
+       readers; tabindex makes the reveal work without a mouse. */ -}}
+<span class="redacted" tabindex="0" title="Redacted — hover to reveal">{{ .Inner | markdownify }}</span>

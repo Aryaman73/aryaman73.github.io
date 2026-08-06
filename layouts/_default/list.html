@@ -67,6 +67,11 @@
   {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
   <header class="entry-header">
+    {{- /* Case number stamped on each file jacket (cognitohazardcore skin).
+           Derived from the post date so it's stable across builds and across
+           paginator pages — an incrementing counter would renumber every post
+           whenever a new one is published. */}}
+    <span class="doc-id" aria-hidden="true">DOC-{{ .Date.Format "060102" }}</span>
     <h2 class="entry-hint-parent">
       {{- .Title }}
       {{- if .Draft }}

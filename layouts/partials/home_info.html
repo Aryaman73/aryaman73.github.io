@@ -1,0 +1,35 @@
+{{- /* Project-level override of PaperMod's home_info partial.
+
+       Same content (site.Params.homeInfoParams from config.yml), re-framed as a
+       containment dossier for the cognitohazardcore skin: a status band across
+       the top, the subject's own statement as the body, and the social links
+       filed as an addendum. Styling lives in
+       assets/css/extended/z3-cognitohazard-content.css (.dossier*).
+
+       The strings in the band are chrome, not data — nothing here is read from
+       front matter, so editing the flavour text means editing this file. */ -}}
+
+{{- with site.Params.homeInfoParams }}
+<article class="first-entry home-info dossier">
+
+  <div class="dossier-bar" aria-hidden="true">
+    <span class="dossier-id">SUBJECT FILE AS-01</span>
+    <span class="dossier-class">CLASS <b>IV</b> — COGNITOHAZARD</span>
+    <span class="dossier-status"><i></i>CONTAINED</span>
+  </div>
+
+  <header class="entry-header">
+    <h1>{{ .Title | markdownify }}</h1>
+  </header>
+
+  <div class="entry-content">
+    {{ .Content | markdownify }}
+  </div>
+
+  <footer class="entry-footer">
+    <div class="dossier-legend">Addendum AS-01.a — approved contact channels</div>
+    {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
+  </footer>
+
+</article>
+{{- end -}}

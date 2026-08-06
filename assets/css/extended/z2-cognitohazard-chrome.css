@@ -1,0 +1,313 @@
+/* ===========================================================================
+   COGNITOHAZARDCORE — 2/3: page chrome
+   ---------------------------------------------------------------------------
+   The parts of the page that aren't content: the two full-viewport atmosphere
+   layers, the fixed containment strip, the header/nav, and the footer.
+
+   PERFORMANCE NOTES (this site has been bitten before — see the removed
+   cursor-glow and aurora effects in git history):
+   - Both atmosphere layers are `position: fixed` pseudo-elements, so they
+     rasterize once and are re-composited, never re-laid-out.
+   - The only thing that animates continuously is the iris, and it animates
+     `transform` only — GPU-composited, no repaint. No blur filters, no
+     background-position animation, no JS, nothing bound to pointer movement.
+   - Everything here is disabled under prefers-reduced-motion (bottom of file).
+   =========================================================================== */
+
+/* The canvas is painted by <html> so both body pseudo-layers can sit above it.
+   PaperMod otherwise paints the background on <body> (and re-paints it via
+   `.list` on section pages), which would bury the iris underneath. */
+html {
+    background: var(--void);
+}
+
+body,
+body.list,
+body.dark.list {
+    background: transparent;
+}
+
+/* ---------------------------------------------------------------------------
+   Atmosphere layer 1 — THE IRIS (behind all content)
+   A vast, very faint eye: a dark pupil, a lime limbal ring, and radial
+   striations from a repeating conic gradient. The conic is what makes the slow
+   rotation legible — concentric rings alone would be rotationally symmetric
+   and appear static. A radial mask cuts the conic down to an annulus so it
+   reads as an iris rather than a starburst filling the screen.
+   --------------------------------------------------------------------------- */
+body::before {
+    content: "";
+    position: fixed;
+    inset: -10vmax;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.75;
+    background:
+        /* pupil */
+        radial-gradient(circle at 50% 44%, rgba(0, 0, 0, 0.9) 0 9vmax, transparent 10vmax),
+        /* limbal ring */
+        radial-gradient(circle at 50% 44%, transparent 0 33vmax, rgba(198, 255, 61, 0.07) 33.5vmax, transparent 35vmax),
+        /* striations */
+        repeating-conic-gradient(from 0deg at 50% 44%, transparent 0 2deg, rgba(198, 255, 61, 0.03) 2deg 4deg),
+        /* ambient bloom behind the whole thing */
+        radial-gradient(70vmax 56vmax at 50% 40%, rgba(198, 255, 61, 0.04), transparent 72%);
+    /* Feathered hard so the annulus never shows an edge; without the long
+       falloff the conic reads as a spotlight fan rather than an iris. */
+    -webkit-mask-image: radial-gradient(circle at 50% 44%, transparent 9vmax, #000 20vmax, #000 30vmax, transparent 44vmax);
+    mask-image: radial-gradient(circle at 50% 44%, transparent 9vmax, #000 20vmax, #000 30vmax, transparent 44vmax);
+    will-change: transform;
+    animation: cog-iris 90s linear infinite;
+}
+
+/* Rotation plus a slow dilation, so it never quite loops where you expect. */
+@keyframes cog-iris {
+    0%   { transform: rotate(0deg)   scale(1); }
+    50%  { transform: rotate(180deg) scale(1.06); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+/* ---------------------------------------------------------------------------
+   Atmosphere layer 2 — CRT OVERLAY (in front of all content)
+   Scanlines, film grain and a vignette, sitting above everything including the
+   mobile-nav overlay (z-index 1000). Alphas are deliberately low: this has to
+   read as texture on a photo of a monitor, not as a filter over the text.
+   --------------------------------------------------------------------------- */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    pointer-events: none;
+    background:
+        /* scanlines */
+        repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.26) 0 1px, transparent 1px 3px),
+        /* grain — fractal noise baked to its own alpha so it needs no extra layer */
+        url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E"),
+        /* vignette */
+        radial-gradient(125% 105% at 50% 42%, transparent 42%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+/* ---------------------------------------------------------------------------
+   THE CONTAINMENT STRIP
+   A fixed warning bar across the top of every page, built entirely out of the
+   header's two pseudo-elements so no template has to be forked:
+     .header::before = the bar (hazard stripes)
+     .header::after  = the marquee text riding on top of it
+   `body { padding-top: var(--hazard-bar-h) }` in z1 reserves the space.
+   --------------------------------------------------------------------------- */
+.header::before,
+.header::after {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: var(--hazard-bar-h);
+    z-index: 500;
+    pointer-events: none;
+}
+
+.header::before {
+    content: "";
+    right: 0;
+    background:
+        repeating-linear-gradient(135deg,
+            rgba(198, 255, 61, 0.07) 0 10px,
+            transparent 10px 20px),
+        rgb(9, 10, 8);
+    border-bottom: 1px solid rgba(198, 255, 61, 0.28);
+}
+
+/* The string is written twice so translating by exactly -50% loops seamlessly.
+   `width: max-content` lets it be as wide as it needs; the bar clips it. */
+.header::after {
+    content: "⚠ CLASS-IV COGNITOHAZARD · VIEWING CONSTITUTES CONSENT · OBSERVATION LOGGED · DO NOT ATTEMPT TO RECALL THIS PAGE LATER · \00a0\00a0 ⚠ CLASS-IV COGNITOHAZARD · VIEWING CONSTITUTES CONSENT · OBSERVATION LOGGED · DO NOT ATTEMPT TO RECALL THIS PAGE LATER · \00a0\00a0";
+    display: flex;
+    align-items: center;
+    width: max-content;
+    white-space: pre;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--hazard);
+    text-shadow: 0 0 10px rgba(198, 255, 61, 0.35);
+    will-change: transform;
+    animation: cog-marquee 64s linear infinite;
+}
+
+@keyframes cog-marquee {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+}
+
+/* ---------------------------------------------------------------------------
+   HEADER + NAV
+   --------------------------------------------------------------------------- */
+.header {
+    border-bottom: 1px solid var(--border);
+    background:
+        linear-gradient(to bottom, rgba(198, 255, 61, 0.025), transparent);
+}
+
+/* The wordmark, glitching rarely rather than constantly — a tic, not a strobe.
+   Chromatic aberration is faked with two offset text-shadows, so no duplicate
+   markup (and therefore no template fork) is needed. */
+.logo a {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    animation: cog-glitch 8s steps(1, end) infinite;
+}
+
+.logo a::before {
+    content: "▚ ";
+    color: var(--hazard);
+    opacity: 0.8;
+}
+
+@keyframes cog-glitch {
+    0%, 90%, 100% { text-shadow: none; transform: translateX(0); }
+    91% { text-shadow: -2px 0 var(--alert), 2px 0 rgba(60, 240, 255, 0.9); transform: translateX(1px); }
+    92% { text-shadow: 2px 0 var(--alert), -2px 0 rgba(60, 240, 255, 0.9); transform: translateX(-1px); }
+    93% { text-shadow: none; transform: translateX(0); }
+    96% { text-shadow: -1px 0 var(--alert), 1px 0 rgba(60, 240, 255, 0.9); transform: translateX(0); }
+    97% { text-shadow: none; }
+}
+
+#menu a {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    transition: color 0.15s ease;
+}
+
+/* [ brackets ] around every nav item — signage, not chrome. */
+#menu li a span::before { content: "["; margin-right: 0.4em; }
+#menu li a span::after  { content: "]"; margin-left: 0.4em; }
+
+#menu li a span::before,
+#menu li a span::after {
+    color: var(--hazard);
+    opacity: 0.3;
+    transition: opacity 0.15s ease;
+}
+
+#menu a:hover {
+    color: var(--hazard);
+}
+
+#menu a:hover span::before,
+#menu a:hover span::after {
+    opacity: 1;
+}
+
+#menu .active {
+    color: var(--hazard);
+    border-bottom: 1px solid var(--hazard-dim);
+    margin-bottom: -1px;
+}
+
+#menu .active::before,
+#menu .active::after {
+    opacity: 1;
+}
+
+/* Mobile nav popup — square it off and retint to match. */
+.mnav-panel {
+    background: var(--entry);
+    border-color: var(--hazard-dim);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8), 0 20px 60px rgba(0, 0, 0, 0.9);
+}
+
+.mnav-list a {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.mnav-list a:hover,
+.mnav-list a:focus-visible {
+    background: var(--hazard-ghost);
+    color: var(--hazard);
+}
+
+.nav-hamburger {
+    color: var(--hazard);
+}
+
+/* ---------------------------------------------------------------------------
+   FOOTER
+   --------------------------------------------------------------------------- */
+.footer {
+    position: relative;
+    border-top: 1px solid var(--border);
+    margin-top: calc(var(--gap) * 2);
+    padding-top: calc(var(--gap) * 1.5);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--secondary);
+}
+
+/* A terminal sign-off above the copyright line. The blinking block is the only
+   other moving thing on the page besides the iris and the marquee. */
+.footer::before {
+    content: "// END OF FILE ▌";
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    color: var(--hazard);
+    opacity: 0.55;
+    animation: cog-blink 1.4s steps(2, end) infinite;
+}
+
+@keyframes cog-blink {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 0.2; }
+}
+
+.footer a {
+    color: var(--secondary);
+    border-bottom: 1px dotted var(--tertiary);
+}
+
+.footer a:hover {
+    color: var(--hazard);
+    border-bottom-color: var(--hazard);
+}
+
+/* Back-to-top becomes a hazard-outlined square. */
+.top-link {
+    border-radius: 0;
+    background: var(--entry);
+    border: 1px solid var(--hazard-dim);
+    color: var(--hazard);
+    padding: 12px;
+}
+
+.top-link:hover {
+    background: var(--hazard);
+    color: var(--void);
+}
+
+/* ---------------------------------------------------------------------------
+   REDUCED MOTION — kill every animation, keep every effect.
+   The iris, the strip and the CRT overlay all still render; they just hold
+   still, which is the point of the aesthetic anyway.
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+    body::before,
+    .header::after,
+    .logo a,
+    .footer::before {
+        animation: none;
+    }
+
+    /* The marquee is written twice for looping; with the animation off, park it
+       at the start so the first copy is the one you read. */
+    .header::after {
+        transform: none;
+    }
+}

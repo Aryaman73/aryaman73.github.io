@@ -1,0 +1,643 @@
+/* ===========================================================================
+   COGNITOHAZARDCORE — 3/3: content
+   ---------------------------------------------------------------------------
+   Page headers, the home dossier, post cards, article typography and the
+   project grid. The governing idea: every page is a document that was
+   recovered rather than published — so headings read as section markers,
+   cards read as file jackets with corner registration brackets, and anything
+   depicting the outside world (images) stays desaturated until you look at it
+   directly.
+   =========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   SECTION HEADERS  (/posts/, /tags/, /projects/, taxonomy terms)
+   --------------------------------------------------------------------------- */
+.page-header h1 {
+    font-size: 26px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.page-header h1::before {
+    content: "> ";
+    color: var(--hazard);
+}
+
+.page-header h1::after {
+    content: "▌";
+    margin-left: 0.15em;
+    color: var(--hazard);
+    animation: cog-blink 1.1s steps(2, end) infinite;
+}
+
+.page-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--gap);
+}
+
+.post-description {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--secondary);
+}
+
+.breadcrumbs {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--secondary);
+}
+
+/* ---------------------------------------------------------------------------
+   THE HOME DOSSIER
+   Markup comes from layouts/partials/home_info.html (a small fork of the
+   theme's). The intro is framed as a case file: a status band across the top,
+   the subject's own statement in the body, and contact channels filed as an
+   addendum.
+   --------------------------------------------------------------------------- */
+.dossier {
+    position: relative;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-top: 1px solid var(--hazard-dim);
+    padding: 0 0 calc(var(--gap) * 1.2);
+    box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.6);
+}
+
+.dossier-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 18px;
+    padding: 9px calc(var(--gap) * 1.1);
+    border-bottom: 1px solid var(--border);
+    background: rgba(198, 255, 61, 0.04);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--secondary);
+}
+
+.dossier-bar .dossier-id {
+    color: var(--hazard);
+}
+
+.dossier-bar .dossier-class b {
+    color: var(--alert);
+}
+
+/* Status pill with a live-looking indicator dot. */
+.dossier-bar .dossier-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-left: auto;
+}
+
+/* Once the band wraps to multiple lines (phones), pushing the status to the
+   right just strands it on a line of its own — let it flow instead. */
+@media screen and (max-width: 640px) {
+    .dossier-bar .dossier-status {
+        margin-left: 0;
+    }
+}
+
+.dossier-bar .dossier-status i {
+    width: 6px;
+    height: 6px;
+    background: var(--hazard);
+    box-shadow: 0 0 8px var(--hazard);
+    animation: cog-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes cog-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.25; }
+}
+
+.dossier .entry-header,
+.dossier .entry-content,
+.dossier .entry-footer {
+    padding-left: calc(var(--gap) * 1.1);
+    padding-right: calc(var(--gap) * 1.1);
+}
+
+.dossier .entry-header {
+    padding-top: calc(var(--gap) * 1.1);
+    padding-bottom: 0;
+}
+
+.dossier .entry-header h1 {
+    font-size: 30px;
+    letter-spacing: 0;
+}
+
+.dossier .entry-content {
+    margin: 10px 0 0;
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: var(--content);
+    /* PaperMod clamps .home-info .entry-content to a few lines; the dossier is
+       meant to be read in full. */
+    -webkit-line-clamp: unset;
+    display: block;
+}
+
+.dossier .entry-content a {
+    color: var(--hazard);
+}
+
+/* Section label above the social icons. */
+.dossier-legend {
+    margin: calc(var(--gap) * 1.1) 0 4px;
+    padding-top: var(--gap);
+    border-top: 1px dashed var(--border);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--secondary);
+}
+
+.dossier .social-icons {
+    padding: 6px 0 0;
+}
+
+.social-icons a {
+    color: var(--secondary);
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.social-icons a:hover {
+    color: var(--hazard);
+    transform: translateY(-2px);
+}
+
+/* ---------------------------------------------------------------------------
+   POST CARDS  (/posts/ and taxonomy listings)
+   Each card is a file jacket: square, hairline-bordered, with registration
+   brackets in two opposite corners drawn from the card's own pseudo-elements.
+   --------------------------------------------------------------------------- */
+.post-entry {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    box-shadow: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.post-entry:hover {
+    border-color: var(--hazard-dim);
+    background: rgb(14, 16, 13);
+}
+
+.post-entry:active {
+    transform: none;
+}
+
+/* Registration brackets. 1 = top-left, 2 = bottom-right. */
+.post-entry::before,
+.post-entry::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--hazard);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.post-entry::before {
+    top: -1px;
+    left: -1px;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.post-entry::after {
+    right: -1px;
+    bottom: -1px;
+    border-left: 0;
+    border-top: 0;
+}
+
+.post-entry:hover::before,
+.post-entry:hover::after,
+.post-entry:focus-within::before,
+.post-entry:focus-within::after {
+    opacity: 1;
+}
+
+/* The case number stamped on each card (rendered by layouts/_default/list.html
+   from the post's date, so it stays stable across builds). */
+.doc-id {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--hazard);
+    opacity: 0.55;
+}
+
+.entry-header h2 {
+    font-size: 19px;
+    line-height: 1.35;
+    letter-spacing: 0;
+}
+
+.entry-content {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--secondary);
+}
+
+.entry-footer,
+.post-meta {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--secondary);
+}
+
+/* The AI-authorship marker (see assets/css/extended/ai-badge.css) becomes the
+   tell that a document is of synthetic origin. */
+.ai-badge {
+    color: var(--hazard);
+}
+
+/* ---------------------------------------------------------------------------
+   SINGLE POST
+   --------------------------------------------------------------------------- */
+.post-header {
+    position: relative;
+    padding-top: 30px;
+}
+
+/* Classification band above every article title. */
+.post-header::before {
+    content: "DOCUMENT · UNREDACTED COPY · HANDLE UNDER OBSERVATION";
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--hazard);
+    opacity: 0.5;
+}
+
+.post-title {
+    font-size: 32px;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+}
+
+.post-content {
+    color: var(--content);
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+    letter-spacing: 0.02em;
+}
+
+/* h2 = a new numbered section of the file. */
+.post-content h2 {
+    padding-left: 12px;
+    border-left: 3px solid var(--hazard);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 21px;
+}
+
+.post-content h3::before {
+    content: "// ";
+    color: var(--hazard);
+    opacity: 0.7;
+}
+
+/* Links: dotted while dormant, inverted on hover — a redaction being lifted. */
+.post-content a {
+    color: var(--hazard);
+    box-shadow: none;
+    border-bottom: 1px dotted var(--hazard-dim);
+    padding: 0 2px;
+    transition: background 0.12s ease, color 0.12s ease;
+}
+
+.post-content a:hover {
+    background: var(--hazard);
+    color: var(--void);
+    border-bottom-color: var(--hazard);
+}
+
+.post-content blockquote {
+    position: relative;
+    margin: var(--content-gap) 0;
+    padding: 12px 16px 12px 42px;
+    border-inline-start: 3px solid var(--alert);
+    background: rgba(255, 45, 58, 0.04);
+    font-style: normal;
+    color: var(--content);
+}
+
+.post-content blockquote::before {
+    content: "⚠";
+    position: absolute;
+    left: 14px;
+    top: 12px;
+    color: var(--alert);
+}
+
+.post-content code {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    color: var(--hazard);
+    font-size: 0.88em;
+}
+
+.post-content pre {
+    border: 1px solid var(--border);
+    border-radius: 0;
+}
+
+.post-content pre code {
+    border: 0;
+    color: inherit;
+}
+
+.copy-code {
+    border-radius: 0;
+    background: var(--tertiary);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+/* Photographic evidence is filed desaturated; looking directly at it restores
+   the colour. Also true of the project screenshots below. The brightness knock
+   matters as much as the grayscale — several posts embed screenshots of
+   white-background web pages, which blow out badly against this much black. */
+.post-content img {
+    filter: grayscale(0.85) contrast(1.05) brightness(0.82);
+    border: 1px solid var(--border);
+    transition: filter 0.35s ease, border-color 0.35s ease;
+}
+
+.post-content img:hover {
+    filter: none;
+    border-color: var(--hazard-dim);
+}
+
+.post-content figure figcaption {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--secondary);
+}
+
+.post-content hr {
+    border: 0;
+    border-top: 1px dashed var(--tertiary);
+}
+
+.post-content table th {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hazard);
+    border-bottom: 1px solid var(--border);
+}
+
+.post-content table td,
+.post-content table th {
+    border-color: var(--border);
+}
+
+.toc {
+    border-radius: 0;
+    border: 1px solid var(--border);
+    background: var(--entry);
+}
+
+.toc details summary {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--hazard);
+}
+
+/* ---------------------------------------------------------------------------
+   REDACTION
+   Applied by the {{< redact >}} shortcode (layouts/shortcodes/redact.html).
+   Blacked out until hovered or focused — the signature move of the genre, and
+   the reason the shortcode keeps the text in the DOM rather than removing it.
+   --------------------------------------------------------------------------- */
+.redacted {
+    background: var(--primary);
+    color: transparent;
+    padding: 0 4px;
+    cursor: help;
+    border-radius: 0;
+    transition: background 0.12s ease, color 0.12s ease;
+}
+
+.redacted:hover,
+.redacted:focus-visible {
+    background: var(--hazard-ghost);
+    color: var(--hazard);
+    outline: none;
+}
+
+/* ---------------------------------------------------------------------------
+   TAGS + PAGINATION
+   --------------------------------------------------------------------------- */
+.post-tags a,
+.terms-tags a {
+    border-radius: 0;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--secondary);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    box-shadow: none;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.post-tags a::before,
+.terms-tags a::before {
+    content: "#";
+    color: var(--hazard);
+    opacity: 0.6;
+    margin-right: 2px;
+}
+
+.post-tags a:hover,
+.terms-tags a:hover {
+    border-color: var(--hazard-dim);
+    color: var(--hazard);
+    background: var(--hazard-ghost);
+}
+
+.pagination a,
+.paginav a {
+    border-radius: 0;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    color: var(--secondary);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.pagination a:hover,
+.paginav a:hover {
+    border-color: var(--hazard-dim);
+    color: var(--hazard);
+}
+
+.paginav .title {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--hazard);
+    opacity: 0.6;
+}
+
+/* ---------------------------------------------------------------------------
+   PROJECT CARDS  (/projects/ — structural rules live in project-cards.css;
+   this only re-dresses them.)
+   --------------------------------------------------------------------------- */
+.project-card {
+    border-radius: 0;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.project-card:hover,
+.project-card:focus-within {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--hazard-dim);
+    background: rgb(14, 16, 13);
+}
+
+/* Registration brackets, same language as the post cards. */
+.project-card::before,
+.project-card::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--hazard);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.project-card::before {
+    top: -1px;
+    left: -1px;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.project-card::after {
+    right: -1px;
+    bottom: -1px;
+    border-left: 0;
+    border-top: 0;
+}
+
+.project-card:hover::before,
+.project-card:hover::after,
+.project-card:focus-within::before,
+.project-card:focus-within::after {
+    opacity: 1;
+}
+
+/* Screenshots as surveillance stills: desaturated, scanlined, resolving to
+   full colour only while the card is being looked at. */
+.project-thumb {
+    background: var(--void);
+}
+
+.project-thumb::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: repeating-linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.32) 0 1px,
+            transparent 1px 3px);
+}
+
+.project-thumb img {
+    filter: grayscale(0.9) contrast(1.1) brightness(0.85);
+    transition: filter 0.35s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-thumb img,
+.project-card:focus-within .project-thumb img {
+    filter: none;
+    transform: scale(1.03);
+}
+
+.project-name {
+    font-size: 17px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.project-tagline {
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--secondary);
+}
+
+.project-links {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.project-cta {
+    color: var(--hazard);
+}
+
+.project-source {
+    border-bottom: 1px dotted var(--tertiary);
+}
+
+.project-source:hover {
+    color: var(--hazard);
+    border-bottom-color: var(--hazard);
+}
+
+.project-intro {
+    font-size: 13px;
+    letter-spacing: 0.04em;
+}
+
+/* ---------------------------------------------------------------------------
+   REDUCED MOTION
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+    .page-header h1::after,
+    .dossier-bar .dossier-status i {
+        animation: none;
+    }
+
+    .post-content img,
+    .project-thumb img,
+    .social-icons a {
+        transition: none;
+    }
+}
