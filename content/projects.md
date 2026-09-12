@@ -28,4 +28,10 @@ projects:
     image: /projects/pomopomo.jpg
     imageAlt: "The pomopomo screen: a focus timer beside a markdown day planner"
     source: "https://github.com/Aryaman73/pomopomo"
+  - name: "cyberchef"
+    tagline: "The Cyber Swiss Army Knife, self-hosted"
+    url: /cyberchef/
+    image: /projects/cyberchef.jpg
+    imageAlt: "CyberChef with a From Base64 + To Hexdump recipe, showing the decoded output"
+    source: "https://github.com/Aryaman73/cyberchef"
 ---
