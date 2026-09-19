@@ -11,3 +11,17 @@
 <script data-goatcounter="https://{{ site.Params.goatCounterCode }}.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 {{- end }}
+
+{{/*
+  Keep the post index and the tag pages out of search results.
+
+  These pages are no longer linked from the header (see menu.main in
+  config.yml), so the only remaining ways to stumble onto them were a search
+  engine and the sitemap. They still build and still work if you type the URL
+  — and individual post URLs are untouched, so existing links keep resolving.
+
+  Kinds matched: "section" (/posts/), "taxonomy" (/tags/), "term" (/tags/<tag>/).
+*/}}
+{{- if in (slice "section" "taxonomy" "term") .Kind }}
+<meta name="robots" content="noindex, follow">
+{{- end }}
