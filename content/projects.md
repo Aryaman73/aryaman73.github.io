@@ -34,4 +34,10 @@ projects:
     image: /projects/cyberchef.jpg
     imageAlt: "CyberChef with a From Base64 + To Hexdump recipe, showing the decoded output"
     source: "https://github.com/Aryaman73/cyberchef"
+  - name: "retro keyboard config"
+    tagline: "Remap an 8BitDo retro keyboard from the browser"
+    url: /8db-retro-config/
+    image: /projects/8db-retro-config.jpg
+    imageAlt: "Retro Keyboard Config in demo mode, showing a keyboard layout with remapped keys highlighted"
+    source: "https://github.com/Aryaman73/8db-retro-config"
 ---
