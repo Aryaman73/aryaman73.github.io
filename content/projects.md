@@ -40,4 +40,10 @@ projects:
     image: /projects/8db-retro-config.jpg
     imageAlt: "Retro Keyboard Config in demo mode, showing a keyboard layout with remapped keys highlighted"
     source: "https://github.com/Aryaman73/8db-retro-config"
+  - name: "op1online"
+    tagline: "Kyle Sweeney's OP-1 synth for the browser, revived"
+    url: /op1-synth/
+    image: /projects/op1-synth.jpg
+    imageAlt: "OP1ONLINE: an OP-1-style synth with coloured effect knobs, a waveform screen and keys mapped to the computer keyboard"
+    source: "https://github.com/Aryaman73/op1-synth"
 ---
